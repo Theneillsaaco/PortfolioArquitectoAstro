@@ -1,11 +1,213 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Arquitecto - Portfolio Personal">
+	<!-- Hero Section -->
+    <section class="hero-modern min-h-screen bg-gradient-to-br from-primary-500 via-primary-600 to-secondary-500 relative flex items-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-500/95 to-secondary-500/90 z-10" />
+
+        <div class="container mx-auto px-6 relative z-20 h-full flex items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+                <!-- Left Content -->
+                <div class="hero-content text-dark">
+                    <div class="inline-flex items0center gap-2 bg-white/15 backdrop-blur-md border-white/30 px-6 py-3 rounded-full mb-8 animate-slide-in-down">
+                        <span class="text-xl animate-wave">👋</span>
+                        <span class="font-semibold">Hola, soy</span>
+                    </div>
+
+                    <h1 class="text-5xl md:text-7xl font-black mb-4 leading-none animate-slide-in-left animation-delay-200">
+                        Andrys
+                        <span class="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent animate-shimmer">
+                            Santana
+                        </span>
+                    </h1>
+
+                    <div class="flex items-center gap-4 mb-8 animate-slide-in-left animation-delay-400">
+                        <span class="text-xl font-semibold uppercase tracking-wide">Arquitecto</span>
+                        <div class="w-1 h-1 bg-accent-500 rounded-full" />
+                        <span class="text-xl font-semibold uppercase tracking-wide">Diseñador</span>
+                    </div>
+
+                    <p class="text-xl text-dark mb-12 leading-relaxed max-w-2xl animate-slide-in-left animation-delay-600">
+                        Creo espacios que cuentan historias y conectan emociones.
+                        Con más de 3 años transformando ideas en realidades arquitectónicas únicas.
+                    </p>
+                    <!-- Stats -->
+                    <div class="flex gap-8 mb-12 animate-slide-in-up animation-delay-800">
+                        <div class="text-center">
+                            <div class="text-3xl font-black text-yellow-400">45+</div>
+                            <div class="text-sm text-dark uppercase tracking-wide font-medium">Proyectos</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-black text-yellow-400">3+</div>
+                            <div class="text-sm text-dark uppercase tracking-wide font-medium">Años</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-black text-yellow-400">15</div>
+                            <div class="text-sm text-dark uppercase tracking-wide font-medium">Premios</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </Layout>
+
+<style>
+    /* Custom Animations */
+    .animation-delay-200 { animation-delay: 0.2s; }
+    .animation-delay-400 { animation-delay: 0.4s; }
+    .animation-delay-600 { animation-delay: 0.6s; }
+    .animation-delay-800 { animation-delay: 0.8s; }
+    .animation-delay-1000 { animation-delay: 1s; }
+    .animation-delay-2000 { animation-delay: 2s; }
+    .animation-delay-3000 { animation-delay: 3s; }
+
+    /* Custom Button Styles */
+    .btn-primary {
+        @apply bg-gradient-to-r text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex items-center justify-center relative overflow-hidden;
+        }
+
+    .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.6s;
+        }
+
+    .btn-primary:hover::before {
+        left: 100%;
+        }
+
+    .btn-secondary {
+        @apply bg-white/10 border-2 border-white/30 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:-translate-y-1 hover:bg-white/20 hover:border-white/50 backdrop-blur-md flex items-center justify-center;
+        }
+
+    /* Filter Button Active State */
+    .filter-btn.active {
+        @apply bg-primary-500 border-primary-500 text-white -translate-y-1 shadow-md;
+        }
+
+    /* Portfolio Grid Animation */
+    .portfolio-card {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.6s ease forwards;
+        }
+
+    .portfolio-card:nth-child(1) { animation-delay: 0.1s; }
+    .portfolio-card:nth-child(2) { animation-delay: 0.2s; }
+    .portfolio-card:nth-child(3) { animation-delay: 0.3s; }
+    .portfolio-card:nth-child(4) { animation-delay: 0.4s; }
+
+    /* Timeline Item Animation on Scroll */
+    .timeline-item {
+        opacity: 0;
+        transform: translateY(50px);
+        }
+
+    .timeline-item.animate {
+        animation: fadeInUp 0.8s ease forwards;
+        }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        }
+
+    ::-webkit-scrollbar-thumb {
+        background: #4b7d49;
+        border-radius: 4px;
+        }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #355e35;
+        }
+</style>
+
+<script>
+    // Scroll to section function
+    function scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }
+
+    // Portfolio filter functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                // Filter portfolio cards
+                portfolioCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+
+                    if (filter === 'all' || category === filter) {
+                        card.style.display = 'block';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(30px)';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(30px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Timeline animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe timeline items
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Observe portfolio cards
+        document.querySelectorAll('.portfolio-card').forEach(card => {
+            observer.observe(card);
+        });
+    });
+
+    // Make scrollToSection globally available
+    window.scrollToSection = scrollToSection;
+</script>

@@ -2,7 +2,7 @@
 import '../styles/global.css'
 export interface Props {
     title: string;
-    description: string;
+    description?: string;
 }
 
 const { title, description = "Portfolio de Arquitecto - Diseños únicos que transforman espacios" } = Astro.props;
