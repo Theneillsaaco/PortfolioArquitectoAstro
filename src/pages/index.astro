@@ -291,8 +291,8 @@ import Layout from '../layouts/Layout.astro';
 </style>
 
 <script>
-    // Scroll to section function
-    function scrollToSection(sectionId) {
+    // Define scrollToSection with type
+    function scrollToSection(sectionId: string): void {
         const element = document.getElementById(sectionId);
         if (element) {
             element.scrollIntoView({
@@ -302,21 +302,27 @@ import Layout from '../layouts/Layout.astro';
         }
     }
 
-    // Portfolio filter functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const portfolioCards = document.querySelectorAll('.portfolio-card');
+    // Extend Window type for scrollToSection
+    declare global {
+        interface Window {
+            scrollToSection: (sectionId: string) => void;
+        }
+    }
+    window.scrollToSection = scrollToSection;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+        const portfolioCards = document.querySelectorAll<HTMLElement>('.portfolio-card');
 
         filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const filter = this.getAttribute('data-filter');
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
 
-                // Remove active class from all buttons
+                // Remove 'active' from all buttons
                 filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
-                this.classList.add('active');
+                button.classList.add('active');
 
-                // Filter portfolio cards
+                // Filter cards
                 portfolioCards.forEach(card => {
                     const category = card.getAttribute('data-category');
 
@@ -340,7 +346,7 @@ import Layout from '../layouts/Layout.astro';
         });
 
         // Timeline animation on scroll
-        const observerOptions = {
+        const observerOptions: IntersectionObserverInit = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
@@ -353,17 +359,12 @@ import Layout from '../layouts/Layout.astro';
             });
         }, observerOptions);
 
-        // Observe timeline items
         document.querySelectorAll('.timeline-item').forEach(item => {
             observer.observe(item);
         });
 
-        // Observe portfolio cards
-        document.querySelectorAll('.portfolio-card').forEach(card => {
+        portfolioCards.forEach(card => {
             observer.observe(card);
         });
     });
-
-    // Make scrollToSection globally available
-    window.scrollToSection = scrollToSection;
 </script>
