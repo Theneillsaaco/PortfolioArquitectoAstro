@@ -332,6 +332,147 @@ import Layout from '../layouts/Layout.astro';
                     <span class="bg-gradient-to-r from-primary-500 to-primary-400 bg-clip-text text-transparent">mi visión</span>
                 </h2>
             </div>
+
+            <!-- Filter Buttons -->
+            <div class="portfolio-filter flex justify-center gap-4 flex wrap mb-16">
+                <button class="filter-btn bg-white border-2 border-cream-300 text-cream-700 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-primary-500 hover:border-primary-500 hover:text-white hover:-translate-y-1 hover:shadow-md active" data-filter="all">
+                    Todos
+                </button>
+                <button class="filter-btn bg-white border-2 border-cream-300 text-cream-700 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-primary-500 hover:border-primary-500 hover:text-white hover:-translate-y-1 hover:shadow-md" data-filter="residential">
+                    Residencial
+                </button>
+                <button class="filter-btn bg-white border-2 border-cream-300 text-cream-700 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-primary-500 hover:border-primary-500 hover:text-white hover:-translate-y-1 hover:shadow-md" data-filter="commercial">
+                    Comercial
+                </button>
+                <button class="filter-btn bg-white border-2 border-cream-300 text-cream-700 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-primary-500 hover:border-primary-500 hover:text-white hover:-translate-y-1 hover:shadow-md" data-filter="cultural">
+                    Cultural
+                </button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="portfolio-card bg-white rounded-2xl overflow-hidden shadow-lg border border-cream-200 hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 group" data-category="residential">
+                    <div class="card-image-container relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             alt="Casa Los Álamos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="card-overlay absolute inset-0 bg-gradient-to-br from-primary-500/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <button class="bg-white text-cream-800 px-6 py-3 rounded-full font-semibold hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                </svg>
+                                Ver Proyecto
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content p-6">
+                        <div class="card-meta flex justify-between items-center mb-4">
+                            <span class="category bg-primary-500 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">Residencial</span>
+                            <span class="year text-cream-600 text-sm font-medium">2023</span>
+                        </div>
+                        <h4 class="project-title text-xl font-bold text-cream-900 mb-3 leading-tight">Casa Familiar Los Álamos</h4>
+                        <p class="project-description text-cream-700 mb-4 leading-relaxed">Una vivienda que abraza la naturaleza tropical</p>
+                        <div class="project-tags flex gap-2 flex-wrap">
+                            <span class="tag bg-cream-100 text-cream-700 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">Santiago, RD</span>
+                            <span class="tag bg-cream-100 text-cream-700 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">350m²</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="portfolio-card bg-white rounded-2xl overflow-hidden shadow-lg border border-cream-200 hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 group" data-category="commercial">
+                    <div class="card-image-container relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600047509358-9dc75507daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             alt="Oficinas Bambú" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="card-overlay absolute inset-0 bg-gradient-to-br from-primary-500/90 to-secondary-500/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <button class="bg-white text-cream-800 px-6 py-3 rounded-full font-semibold hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                </svg>
+                                Ver Proyecto
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content p-6">
+                        <div class="card-meta flex justify-between items-center mb-4">
+                            <span class="category bg-secondary-500 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">Comercial</span>
+                            <span class="year text-cream-600 text-sm font-medium">2022</span>
+                        </div>
+                        <h4 class="project-title text-xl font-bold text-cream-900 mb-3 leading-tight">Oficinas Centrales Bambú</h4>
+                        <p class="project-description text-cream-700 mb-4 leading-relaxed">Arquitectura corporativa con identidad caribeña</p>
+                        <div class="project-tags flex gap-2 flex-wrap">
+                            <span class="tag bg-cream-100 text-cream-700 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">Santo Domingo</span>
+                            <span class="tag bg-cream-100 text-cream-700 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">1200m²</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="portfolio-card bg-white rounded-2xl overflow-hidden shadow-lg border border-cream-200 hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 group" data-category="cultural">
+                    <div class="card-image-container relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             alt="Centro Cultural Moca" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="card-overlay absolute inset-0 bg-gradient-to-br from-primary-500/90 to-secondary-500/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <button class="bg-white text-cream-800 px-6 py-3 rounded-full font-semibold hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                </svg>
+                                Ver Proyecto
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content p-6">
+                        <div class="card-meta flex justify-between items-center mb-4">
+                            <span class="category bg-accent-500 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">Cultural</span>
+                            <span class="year text-cream-600 text-sm font-medium">2021</span>
+                        </div>
+                        <h4 class="project-title text-xl font-bold text-cream-900 mb-3 leading-tight">Centro Cultural Moca</h4>
+                        <p class="project-description text-cream-700 mb-4 leading-relaxed">Espacio comunitario que celebra la cultura local</p>
+                        <div class="project-tags flex gap-2 flex-wrap">
+                            <span class="tag bg-cream-100 text-cream-700 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">Moca, RD</span>
+                            <span class="tag bg-cream-100 text-cream-700 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">800m²</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="portfolio-card bg-white rounded-2xl overflow-hidden shadow-lg border border-cream-200 hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 group" data-category="residential">
+                    <div class="card-image-container relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             alt="Villa Coral" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="card-overlay absolute inset-0 bg-gradient-to-br from-primary-500/90 to-secondary-500/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <button class="bg-white text-cream-800 px-6 py-3 rounded-full font-semibold hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                </svg>
+                                Ver Proyecto
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content p-6">
+                        <div class="card-meta flex justify-between items-center mb-4">
+                            <span class="category bg-primary-500 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">Residencial</span>
+                            <span class="year text-cream-600 text-sm font-medium">2024</span>
+                        </div>
+                        <h4 class="project-title text-xl font-bold text-cream-900 mb-3 leading-tight">Villa Coral</h4>
+                        <p class="project-description text-cream-700 mb-4 leading-relaxed">Lujo tropical con vista al Caribe</p>
+                        <div class="project-tags flex gap-2 flex-wrap">
+                            <span class="tag bg-cream-100 text-cream-700 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">Punta Cana</span>
+                            <span class="tag bg-cream-100 text-cream-700 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">450m²</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View More Button -->
+            <div class="text-center mt-16">
+                <button class="btn-primary group">
+                    Ver Portafolio Completo
+                    <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                    </svg>
+                </button>
+            </div>
         </div>
     </section>
 </Layout>
