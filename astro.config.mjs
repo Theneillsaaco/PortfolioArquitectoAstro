@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
     site: 'https://Theneillsaaco.github.io',
-    base: 'https://github.com/Theneillsaaco/PortfolioArquitectoAstro',
+    base: '/PortfolioArquitectoAstro',
     server:{
         host: true,
         port: 4321,
