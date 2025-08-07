@@ -241,15 +241,13 @@ select:focus-visible {
 
 /* Button Styles */
 .btn-primary {
-    background: linear-gradient(135deg, #cabaa1, #d8cbb8);
-    color: white;
+    color: #766f5e;
     padding: 1rem 2rem;
     border-radius: 12px;
     transition: 0.3s ease;
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     position: relative;
     overflow: hidden;
-    border: none;
 }
 
 .btn-primary:before {
@@ -268,6 +266,8 @@ select:focus-visible {
 }
 
 .btn-primary:hover {
+    color: white;
+    background: #7f9c59;
     transform: translateY(-4px);
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }

@@ -32,11 +32,6 @@ import Layout from '../layouts/Layout.astro';
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
                 <!-- Left Content -->
                 <div class="hero-content text-dark relative">
-                    <div class="inline-flex items0center gap-2 bg-white/15 backdrop-blur-md border-white/30 px-6 py-3 rounded-full mb-8 animate-slide-in-down">
-                        <span class="text-xl animate-wave">👋</span>
-                        <span class="font-semibold">Hola, soy</span>
-                    </div>
-
                     <div class="flex flex-row items-center gap-4">
                         <div class="flex-1">
                             <h1 class="text-5xl md:text-7xl font-black mb-4 leading-none animate-slide-in-left animation-delay-200">
@@ -86,13 +81,13 @@ import Layout from '../layouts/Layout.astro';
 
                     <!-- Action Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 animate-slide-in-up animation-delay-100">
-                        <button class="btn-primary group" onclick="scrollToSection('proyecto')">
+                        <button class="btn-primary border-2 border-cream-300 hover:border-primary-500 group flex items-center justify-center" onclick="scrollToSection('proyecto')">
                             <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24">
                                 <path d="M4 4h4v4H4V4zm6 0h4v4h-4V4zm6 0h4v4h-4V4zM4 10h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4zM4 16h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4z"/>
                             </svg>
                             Ver Mi Trabajo
                         </button>
-                        <button class="btn-primary group" onclick="scrollToSection('contacto')">
+                        <button class="btn-primary border-2 border-cream-300 hover:border-primary-500 group flex items-center justify-center" onclick="scrollToSection('contacto')">
                             <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24">
                                 <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
                             </svg>
@@ -466,7 +461,7 @@ import Layout from '../layouts/Layout.astro';
 
             <!-- View More Button -->
             <div class="text-center mt-16">
-                <button class="btn-primary group">
+                <button class="btn-primary border-2 border-cream-300 hover:border-primary-500 group inline-flex items-center justify-center">
                     Ver Portafolio Completo
                     <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
