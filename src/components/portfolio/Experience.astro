@@ -1,0 +1,75 @@
+﻿---
+import ExperienceItem from "./ExperienceItem.astro";
+import Heading from "../ui/Heading.astro";
+import { Icon } from "astro-icon/components";
+
+const EXPERIENCE = [
+    {
+        date: "2014 - 2016",
+        title: "Graduación en Arquitectura",
+        subtitle: "Universidad Xd",
+        description:
+            "Pontificia Universidad Católica Madre y Maestra (PUCMM). Proyecto de tesis: \"Vivienda Social Sostenible en el Caribe\"."
+    },
+    {
+        date: "2017",
+        title: "Primer Proyecto Independiente",
+        subtitle: "hola",
+        description:
+            "Casa residencial en Santiago que marcó el inicio de mi carrera como arquitecto independiente. Un proyecto que definió mi estilo personal."
+    },
+    {
+        date: "2019",
+        title: "Reconocimiento Nacional",
+        subtitle: "no se que poner en subtitulo",
+        description:
+            "Premio \"Joven Arquitecto del Año\" - Centro Comunitario en Moca"
+    },
+    {
+        date: "2021",
+        title: "Expansión Internacional",
+        subtitle: "no se que poner en subtitulo",
+        description:
+            "Primer proyecto en Costa Rica - Colaboración centroamericana"
+    },
+    {
+        date: "2024",
+        title: "Estudio Consolidado",
+        subtitle: "no se que poner en subtitulo",
+        description:
+            "Oficina en Punta Cana - Equipo de 5 profesionales"
+    }
+];
+
+---
+
+<section id="experience" class="py-8 px-8 max-md:py-4 md-4 bg-cream-50 scroll-m-16">
+    <div class="ax-w-5xl mx-auto flex flex-col gap-12">
+        <div class="flex gap-4 items-center justify-center">
+            <Icon class="text-3xl text-dark dark:text-white" name="portfolio/Clock" />
+            <Heading text="Work" textGradient="Experience" level={2} />
+        </div>
+
+        <div class="relative max-md:mt-0 mt-8" aria-label="Professional experience">
+            <ol class="relative mt-10">
+                {
+                    EXPERIENCE.map((experience, index) => (
+                        <li>
+                            <article
+                                role="article"
+                                aria-labelledby={`experience-title-${index}`}
+                            >
+                                <div
+                                    class="flex flex-col gap-2 text-zinc-00 dark:text-zinc-300 md:col-span-3"
+                                    aria-describedby={'experience-title-${index}'}
+                                >
+                                    <ExperienceItem {...experience} />
+                                </div>
+                            </article>
+                        </li>
+                    ))
+                }
+            </ol>
+        </div>
+    </div>
+</section>
