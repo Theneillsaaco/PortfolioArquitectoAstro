@@ -1,6 +1,12 @@
 ﻿---
 import Heading from "../ui/Heading.astro"
 import { Icon } from "astro-icon/components"
+
+const points = [
+    { icon: "portfolio/Bulb", title: "Diseño Inteligente", desc: "Cada espacio debe contar una historia única"},
+    { icon: "portfolio/Heart", title: "Conexión Emocional", desc: "Arquitectura que conecta con las emociones" },
+    { icon: "", title: "Sostenibilidad", desc: "Respeto por el contexto cultural y ambiental" }
+];
 ---
 
 <section id="sobre-mi" class="py-28 bg-cream-50">
@@ -43,11 +49,7 @@ import { Icon } from "astro-icon/components"
 
                 <!-- Philosophy Points -->
                 <div class="space-y-8">
-                    {[
-                        { icon: "portfolio/Bulb", title: "Diseño Inteligente", desc: "Cada espacio debe contar una historia única"},
-                        { icon: "portfolio/Heart", title: "Conexión Emocional", desc: "Arquitectura que conecta con las emociones" },
-                        { icon: "", title: "Sostenibilidad", desc: "Respeto por el contexto cultural y ambiental" }
-                    ].map((point) => (
+                    {points.map(point => (
                         <div class="flex items-start gap-4">
                             <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-cream-400 to-cream-300 rounded-xl flex items-center justify-center text-dark shadow-md">
                                 {point.icon && <Icon class="w-6 h-6" name={point.icon} />}
