@@ -169,7 +169,7 @@ select:focus-visible {
     background: conic-gradient(
         from var(--border-angle),
         transparent 40%,
-        #4b7d49 50%,
+        #7f9c59 50%,
         transparent 60%
     );
 }

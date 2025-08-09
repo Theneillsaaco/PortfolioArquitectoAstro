@@ -1,7 +1,8 @@
 ﻿---
 import { getCollection, type CollectionEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
-import Heading from "../ui/Heading.astro"
+import Heading from "../ui/Heading.astro";
+import Button from "../ui/Button.astro";
 
 const projects: CollectionEntry<"projects">[] = await getCollection("projects");
 
@@ -96,10 +97,13 @@ const categories = Array.from(
 
         <!-- View More Button -->
         <div class="text-center mt-16">
-            <button class="btn-primary border-2 border-cream-300 hover:border-primary-500 group inline-flex items-center justify-center">
-                Ver Portafolio Completo
-                <Icon class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" name="portfolio/Arrow" />
-            </button>
+            <Button
+                text="Ver Portafolio Completo"
+                variant="outline"
+                iconName="portfolio/Arrow"
+                animatedBorder={true}
+                iconAfterText={true}
+            />
         </div>
     </div>
 </section>
