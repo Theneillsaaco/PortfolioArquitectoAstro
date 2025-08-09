@@ -1,0 +1,140 @@
+﻿---
+import { getCollection, type CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import Heading from "../ui/Heading.astro"
+
+const projects: CollectionEntry<"projects">[] = await getCollection("projects");
+
+const categories = Array.from(
+    new Set(projects.map(p => p.data.type.toLowerCase()))
+).sort();
+---
+
+<section id="proyecto" class="portfolio-modern py-28 bg-cream-50">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-20">
+            <div class="section-badge inline-flex items-center gap-2 bg-primary-500 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide mb-6">
+                <Icon class="w-4 h-4" name="portfolio/Proyecto" />
+                Portfolio
+            </div>
+            <Heading text="Proyectos que definen" textGradient="mi visión" level={2} />
+        </div>
+
+        <!-- Filter Buttons -->
+        <div id="portfolio-filter" class="portfolio-filter flex justify-center gap-4 flex-wrap mb-16 select-none">
+            <button
+                class="filter-btn bg-white border-2 border-cream-300 text-cream-700 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-primary-500 hover:border-primary-500 hover:text-white hover:-translate-y-1 hover:shadow-md active"
+                data-filter="all"
+            >
+                Todos
+            </button>
+            {categories.map(cat => (
+                <button
+                    class="filter-btn bg-white border-2 border-cream-300 text-cream-700 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-primary-500 hover:border-primary-500 hover:text-white hover:-translate-y-1 hover:shadow-md"
+                    data-filter={cat}
+                >
+                    {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </button>
+            ))}
+        </div>
+
+        <!-- Portfolio Grid -->
+        <div
+            id="portfolio-grid"
+            class="portfolio-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
+        >
+            {projects.map(proj => (
+                <div
+                    class="portfolio-card bg-white rounded-2xl overflow-hidden shadow-lg border border-cream-200 hover:shadow-2xl hover:-translate-y-4 transition-transform duration-500 group opacity-100 scale-100"
+                    data-category={proj.data.type.toLowerCase()}
+                    aria-label={`Proyecto: ${proj.data.title}, Categoria: ${proj.data.type}`}
+                    role="article"
+                    tabindex="0"
+                >
+                    <div class="card-image-container relative h-64 overflow-hidden">
+                        <img
+                            src={proj.data.img.cover}
+                            alt={proj.data.title}
+                            loading="lazy"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                        <div class="card-overlay absolute inset-0 bg-gradient-to-br from-primary-500/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <button
+                                class="bg-white text-cream-800 px-6 py-3 rounded-full font-semibold hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex items-center gap-2"
+                                aria-label={`Var detalles del proyecto ${proj.data.title}`}
+                            >
+                                <Icon class="w-5 h-5" name="portfolio/Eyes" />
+                                Ver Proyecto
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Contenido -->
+                    <div class="card-content p-6">
+                        <div class="card-meta flex justify-between items-center mb-4">
+                            <span class="category bg-primary-500 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">
+                                {proj.data.type}
+                            </span>
+                            <span class="year text-cream-600 text-sm font-medium">
+                                {proj.data.date}
+                            </span>
+                        </div>
+                        <h4 class="project-title text-xl font-bold text-cream-900 mb-3 leading-tight">{proj.data.title}</h4>
+                        <p class="project-description text-cream-700 mb-4 leading-relaxed">{proj.data.description}</p>
+                        <div class="project-tags flex gap-2 flex-wrap">
+                            <span class="tag bg-cream-100 text-cream-700 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">
+                                {proj.data.location}
+                            </span>
+                            <span class="tag bg-cream-100 text-cream-700 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">
+                                {proj.data.meters}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <!-- View More Button -->
+        <div class="text-center mt-16">
+            <button class="btn-primary border-2 border-cream-300 hover:border-primary-500 group inline-flex items-center justify-center">
+                Ver Portafolio Completo
+                <Icon class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" name="portfolio/Arrow" />
+            </button>
+        </div>
+    </div>
+</section>
+
+<script type="module" is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const portfolioCards = document.querySelectorAll(".portfolio-card");
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                filterButtons.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+
+                const filter = btn.getAttribute("data-filter");
+
+                portfolioCards.forEach(card => {
+                    const category = card.getAttribute("data-category");
+                    if (filter === "all" || category === filter) {
+                        card.style.display = "block";
+
+                        setTimeout(() => {
+                            card.classList.remove("opacity-0", "scale-95");
+                            card.classList.add("opacity-100", "scale-100");
+                        }, 20);
+                    } else {
+                        card.classList.remove("opacity-100", "scale-100");
+                        card.classList.add("opacity-0", "scale-95");
+
+                        setTimeout(() => {
+                            card.style.display = "none";
+                        }, 300);
+                    }
+                });
+            });
+        });
+    });
+</script>
