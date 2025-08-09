@@ -1,151 +1,127 @@
 ﻿---
 import { Icon } from "astro-icon/components";
 
-type ButtonVariant = "default" | "big" | "dark";
+type ButtonVariant = "primary" | "secondary" | "outline";
 
 export interface Props {
-    link: string;
+    link?: string;
     text: string;
     iconName?: string;
     variant?: ButtonVariant;
     ariaLabel?: string;
     disabled?: boolean;
     isLoading?: boolean;
-    isExternal: boolean;
+    isExternal?: boolean;
     isActive?: boolean;
     class?: string;
+    scrollTarget?: string;
+    onClick?: string;
 }
 
 const {
     link,
     text,
     iconName,
-    variant = "default",
+    variant = "primary",
     ariaLabel,
     disabled = false,
     isLoading = false,
     isExternal = false,
     isActive = false,
-    class: className = ""
+    class: className = "",
+    scrollTarget,
+    onClick
 } = Astro.props as Props;
 
-// Common base classes for all buttons
+// Clases base
 const baseClasses = `
-    z-2
-    text-center
-    cursor-pointer
-    leading-none
-    hover:scale-110
-    w-fit
-    font-medium
+    btn-${variant}
+    border-2
+    group
     flex
-    gap-2
+    items-center
+    justify-center
+    cursor-pointer
     transition-all
     ease-in-out
-    justify-center
-    items-center
-    rounded-full
+    rounded-lg
+    font-medium
     disabled:opacity-50
     disabled:cursor-not-allowed
-    disabled:hover:scale-100
-    disabled:hover:bg-none
-    disabled:hover:shadow-none
-    aria-disabled:opacity-50
-    aria-disabled:cursor-not-allowed
-    aria-disabled:hover:scale-100
-    aria-disabled:hover:bg-none
-    aria-disabled:hover:shadow-none
+    hover:scale-105
 `;
 
-// Specific classes for each variant
+// Variantes específicas los estilos
 const variantClasses = {
-    default: `
-        text-blacktext/90 
-        dark:text-mint-50 
-        dark:hover:text-white 
-        px-6 
-        py-4 
-        max-xl:px-5 
-        max-sm:py-2 
-        max-sm:px-3 
-        text-lg 
-        max-xl:text-base 
-        max-sm:text-sm 
-        hover:bg-linear-to-l 
-        bg-linear-to-r 
-        from-riptide-300 
-        to-mint-300 
-        dark:from-riptide-500 
-        dark:to-mint-500
+    primary: `
+        border-cream-300 
+        hover:border-primary-500 
+        hover:bg-primary-500 
+        hover:bg-primary-600 
+        text-white 
+        px-6 py-3
     `,
-    big: `
-        font-normal 
-        gap-3 
-        max-md:gap-1 
-        text-blacktext 
-        dark:text-mint-50 
-        dark:hover:text-white 
-        px-8 
-        max-sm:py-3 
-        py-5 
-        max-xl:px-6 
-        max-sm:px-3 
-        text-2xl 
-        max-xl:text-xl 
-        max-sm:text-lg 
-        hover:bg-linear-to-l 
-        bg-linear-to-r 
-        from-riptide-200 
-        to-mint-200 
-        dark:from-riptide-500 
-        dark:to-mint-500
+    secondary: `
+        border-secondary-300 
+        hover:border-secondary-500 
+        bg-secondary-500 
+        hover:bg-secondary-600 
+        text-white 
+        px-6 py-3
     `,
-    dark: `
-        group 
-        dark:text-mint-50 
-        text-blacktext
-        dark:hover:text-white 
-        px-6 
-        py-4 
-        max-xl:px-5 
-        max-sm:py-2 
-        max-sm:px-3 
-        text-lg 
-        max-xl:text-base 
-        max-sm:text-sm 
-        dark:bg-zinc-800 
-        bg-white
-        dark:hover:bg-mint-500
-    `,
+    outline: `
+        border-primary-500 
+        hover:bg-primary-500 
+        bg-transparent 
+        hover:text-white 
+        text-primary-500 
+        px-6 py-3
+    `
 };
 
-// Icon classes for each variant
-const iconClasses = {
-    default: "size-5",
-    big: "size-5",
-    dark: "size-5 dark:text-mint-300 text-blacktext group-hover:text-blacktext dark:group-hover:text-white transition-colors",
-};
+// Clases para iconos
+const iconClasses = "w-5 h-5 mr-2";
 
 const buttonClasses = `${baseClasses} ${variantClasses[variant]}`;
 
-// Generate aria-label if not provided
+// Generar aria-label si no se proporciona
 const buttonAriaLabel = ariaLabel || (iconName ? `${text} ${iconName}` : text);
 
-// Determine if it's an external link
-const isExternalLink = isExternal || link.startsWith('http');
+// Determinar si es un enlace externo
+const isExternalLink = isExternal || (link && link.startsWith('http'));
 
-// Additional attributes for external links
+// Atributos adicionales para enlaces externos
 const externalAttributes = isExternalLink ? {
     target: '_blank',
     rel: 'noopener noreferrer'
 } : {};
 
-// Loading state
-const loadingText = isLoading ? 'Loading...' : text;
-const loadingAriaLabel = isLoading ? `${buttonAriaLabel} - Loading` : buttonAriaLabel;
+// Estado de carga
+const loadingText = isLoading ? 'Cargando...' : text;
+const loadingAriaLabel = isLoading ? `${buttonAriaLabel} - Cargando` : buttonAriaLabel;
+
+// Determinar el onclick
+const onClickHandler = onClick || (scrollTarget ? `scrollToSection('${scrollTarget}')` : undefined);
+
+// Determinar si usar enlace o botón
+const useButton = !link || scrollTarget || onClick;
 ---
 
-<div class="w-fit h-fit from-transparent via-riptide-300 to-transparent dark:from-transparent dark:via-mint-500 dark:to-transparent  from-40% to-60% animate-rotate-border bg-conic/[from_var(--border-angle)] p-px hover:shadow-lg hover:shadow-mint-500/30 rounded-full">
+{useButton ? (
+    <button
+            class:list={[buttonClasses, className]}
+            onclick={onClickHandler}
+            aria-label={loadingAriaLabel}
+            disabled={disabled}
+            aria-disabled={disabled}
+            aria-busy={isLoading}
+            aria-pressed={isActive}
+    >
+        {iconName && <Icon name={iconName} class={iconClasses} aria-hidden="true" />}
+        {isLoading && <Icon name="mdi:loading" class="animate-spin w-5 h-5 mr-2" aria-hidden="true" />}
+        {loadingText}
+    </button>
+    ) : (
     <a
             class:list={[buttonClasses, className]}
             href={disabled ? '#' : link}
@@ -156,8 +132,8 @@ const loadingAriaLabel = isLoading ? `${buttonAriaLabel} - Loading` : buttonAria
             aria-pressed={isActive}
             {...externalAttributes}
     >
-        {iconName && <Icon name={iconName} class={iconClasses[variant]} aria-hidden="true" />}
-        {isLoading && <Icon name="mdi:loading" class="animate-spin" aria-hidden="true" />}
+        {iconName && <Icon name={iconName} class={iconClasses} aria-hidden="true" />}
+        {isLoading && <Icon name="mdi:loading" class="animate-spin w-5 h-5 mr-2" aria-hidden="true" />}
         {loadingText}
     </a>
-</div>
+)}

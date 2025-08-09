@@ -2,8 +2,8 @@
 import Button from "../ui/Button.astro"
 import Heading from "../ui/Heading.astro"
 import { Icon } from "astro-icon/components";
-
 ---
+
 <section class="hero-modern min-h-screen relative flex items-center overflow-hidden">
     <div class="absolute inset-0 z-10" />
 
@@ -34,29 +34,23 @@ import { Icon } from "astro-icon/components";
             <div class="hero-content text-dark relative">
                 <div class="flex flex-row items-center gap-4">
                     <div class="flex-1">
-                        <h1 class="text-5xl md:text-7xl font-black mb-4 leading-none animate-slide-in-left animation-delay-200">
-                            Andrys
-                            <span class="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent animate-shimmer">
-                                    Santana
-                                </span>
-                        </h1>
+                        <Heading text="Andry" textGradient="Santana" level={1} />
                     </div>
 
                     <!-- Main Portrait -->
                     <div class="main-portrait w-32 h-40 sm:w-40 sm:h-48 md:w-60 md:h-72 rounded-3xl overflow-hidden shadow-2xl animate-portrait-float flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                             alt="Andrys Santana" class="w-full h-full object-cover" />
-                        <div class="experience-badge absolute -bottom-3 -right-3 w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full flex flex-col items-center justify-center text-white shadow-xl">
-                            <span class="text-lg sm:text-xl md:text-2xl font-black">3+</span>
-                            <span class="text-[8px] sm:text-[10px] md:text-xs font-medium uppercase">Años</span>
-                        </div>
+                        <img
+                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                            alt="Andrys Santana"
+                            class="w-full h-full object-cover"
+                        />
                     </div>
                 </div>
 
                 <div class="flex items-center gap-4 mb-8 animate-slide-in-left animation-delay-400">
-                    <span class="text-xl font-serif uppercase tracking-wide">Arquitecto</span>
+                    <span class="text-xl uppercase tracking-wide">Arquitecto</span>
                     <div class="w-1 h-1 bg-accent-500 rounded-full" />
-                    <span class="text-xl font-serif uppercase tracking-wide">Diseñador</span>
+                    <span class="text-xl uppercase tracking-wide">Diseñador</span>
                 </div>
 
                 <p class="text-xl text-dark mb-12 leading-relaxed max-w-2xl animate-slide-in-left animation-delay-600">
@@ -81,14 +75,18 @@ import { Icon } from "astro-icon/components";
 
                 <!-- Action Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 animate-slide-in-up animation-delay-100">
-                    <button class="btn-primary border-2 border-cream-300 hover:border-primary-500 group flex items-center justify-center" onclick="scrollToSection('proyecto')">
-                        <Icon class="w-5 h-5 mr-2" name="portfolio/Proyecto" />
-                        Ver Mi Trabajo
-                    </button>
-                    <button class="btn-primary border-2 border-cream-300 hover:border-primary-500 group flex items-center justify-center" onclick="scrollToSection('contacto')">
-                        <Icon class="w-5 h-5 mr-2" name="portfolio/Contacto" />
-                        Contactar
-                    </button>
+                    <Button
+                        text="Ver mis Proyectos"
+                        variant="primary"
+                        iconName="portfolio/Proyecto"
+                        onClick="scrollToSection('proyecto')"
+                    />
+                    <Button
+                        text="Contactar"
+                        variant="primary"
+                        iconName="portfolio/Contacto"
+                        onClick="scrollToSection('contacto')"
+                    />
                 </div>
             </div>
 
