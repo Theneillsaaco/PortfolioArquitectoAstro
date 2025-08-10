@@ -1,6 +1,12 @@
 ﻿---
 import Button from "../ui/Button.astro";
 import Heading from "../ui/Heading.astro";
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+const selectedProjects = projects
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 4);
 
 const stats = [
     { value: 45, suffix: "+", label: "Proyectos" },
@@ -96,10 +102,31 @@ const stats = [
             </div>
 
             <!-- Right Visual -->
-            <div class="hero-visual relative h-96 lg:h-screen flex items-center justify-center">
+            <div class="relative h-96 lg:h-screen flex items-center justify-center">
                 <div class="relative w-full max-w-md h-full">
                     <!-- Floating Cards -->
-                    <div class="floating-card absolute top-16 -left-8 w-58 bg-white rounded-2xl p-4 shadow-2xl animate-float">
+                    {selectedProjects.map((proj, index) => {
+                        const positions = [
+                            "absolute top-16 -left-8",
+                            "absolute bottom-20 -right-8",
+                            "absolute top-40 -right-6",
+                            "absolute bottom-10 -left-6",
+                        ];
+                        return (
+                            <div class={`floating-card ${positions[index]} w[56 bg-cream-200 rounded-2xl animate-float ${index % 2 === 1 ? "animate-delay-2000" : ""}`}>
+                                <img
+                                    src={proj.data.img.cover}
+                                    alt={proj.data.title}
+                                    class="w-full h-28 object-cover rounded-xl mb-3"
+                                />
+                                <div class="text-center">
+                                    <div class="font-semibold text-cream-800 text-sm">{proj.data.title}</div>
+                                    <div class="text-xs text-cream-600">{proj.data.date}</div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                    <!--<div class="floating-card absolute top-16 -left-8 w-58 bg-white rounded-2xl p-4 shadow-2xl animate-float">
                         <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
                              alt="Casa Los Alanis" class="w-full h-28 object-cover rounded-xl mb-3" />
                         <div class="text-center">
@@ -115,7 +142,7 @@ const stats = [
                             <div class="font-semibold text-cream-800 text-sm">Oficinas Bambú</div>
                             <div class="text-xs text-cream-600">2022</div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
