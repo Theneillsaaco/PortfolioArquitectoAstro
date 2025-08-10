@@ -1,7 +1,7 @@
 ﻿---
 import Button from "../ui/Button.astro";
 import Heading from "../ui/Heading.astro";
-import {CollectionEntry, getCollection} from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 const projects: CollectionEntry<"projects">[] = await getCollection("projects");
 const selectedProjects = projects
