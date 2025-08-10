@@ -21,9 +21,9 @@ const contactMethods = [
 ];
 
 const socials = [
-    { href: "#", color: "hover:bg-primary-500", icon: "socialLinks/Pinterest" },
+    { href: "#", color: "hover:bg-red-500", icon: "socialLinks/Pinterest" },
     { href: "#", color: "hover:bg-blue-600", icon: "socialLinks/Linkedin" },
-    { href: "#", color: "hover:bg-primary-500", icon: "socialLinks/WhatsApp" }
+    { href: "#", color: "hover:bg-green-500", icon: "socialLinks/WhatsApp" }
 ];
 ---
 
@@ -67,7 +67,7 @@ const socials = [
                 <h6 class="text-lg font-semibold text-cream-900">Sigueme en redes</h6>
                 <div class="flex gap-4">
                     {socials.map(social => (
-                        <a href={social.href} class={`w-12 h-12 bg-white rounded-full flex items-center justify-center text-cream-700 border border-cream-200 ${social.color} hover:text-whiter hover:-translate-y-1 hover:shadow-lg transition-all duration-300`}>
+                        <a href={social.href} class={`w-12 h-12 bg-white rounded-full flex items-center justify-center text-cream-800 border border-cream-200 ${social.color} hover:text-whiter hover:-translate-y-1 hover:shadow-lg transition-all duration-300`}>
                             <Icon class="w-6 h-6" name={social.icon} />
                         </a>
                     ))}
