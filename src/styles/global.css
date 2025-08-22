@@ -345,11 +345,6 @@ select:focus-visible {
     .no-print {
         display: none !important;
     }
-
-    * {
-        color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-    }
 }
 
 /* Reduced Motion */
