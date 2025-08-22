@@ -11,13 +11,13 @@ export default defineConfig({
   base: '/PortfolioArquitectoAstro',
 
   server:{
-      host: true,
-      port: 4321,
+    host: true,
+    port: 4321,
   },
 
   vite: {
-      plugins: [tailwindcss()]
+    plugins: [tailwindcss()]
   },
   
-  integrations: [icon()],
+  integrations: [icon()]
 });
