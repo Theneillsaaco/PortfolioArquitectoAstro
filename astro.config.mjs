@@ -18,7 +18,6 @@ export default defineConfig({
   vite: {
       plugins: [tailwindcss()]
   },
-
-  compressHTML: true,
+  
   integrations: [icon()],
 });
