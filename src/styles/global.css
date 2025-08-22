@@ -1,6 +1,6 @@
 @import "tailwindcss";
+@import "tailwindcss-animated";
 @config "../../tailwind.config.mjs";
-
 
 /* Custom CSS Variables */
 :root {
@@ -35,14 +35,6 @@ body {
     color: #1e293b;
 }
 
-.text-dark-light {
-    color: #475569;
-}
-
-.text-dark-lighter {
-    color: #64748b;
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
@@ -61,85 +53,12 @@ body {
     background: #355e35;
 }
 
-/* Focus States for Accessibility */
-.focus-visible:focus,
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-    outline: 2px solid #4b7d49;
-    outline-offset: 2px;
-}
-
-
-
-/* Typography Utilities */
-.text-balance {
-    text-wrap: balance;
-}
-
-.text-pretty {
-    text-wrap: pretty;
-}
-
-/* Glass Effect Utility */
-.glass {
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.glass-dark {
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
 /* Gradient Text Utility */
 .gradient-text {
     background: linear-gradient(135deg, #4b7d49, #7fa378);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-}
-
-/* Shadow Utilities */
-.shadow-soft {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.shadow-soft-lg {
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-}
-
-.shadow-soft-xl {
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-}
-
-/* Card Hover Effects */
-.card-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-/* Image Hover Effects */
-.image-hover {
-    overflow: hidden;
-}
-
-.image-hover img {
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.image-hover:hover img {
-    transform: scale(1.1);
 }
 
 /* Boton */
@@ -174,19 +93,6 @@ select:focus-visible {
     );
 }
 
-/* Animation*/
-.animation-delay-200 { animation-delay: 0.2s; }
-.animation-delay-300 { animation-delay: 0.3s; }
-.animation-delay-400 { animation-delay: 0.4s; }
-.animation-delay-500 { animation-delay: 0.5s; }
-.animation-delay-600 { animation-delay: 0.6s; }
-.animation-delay-700 { animation-delay: 0.7s; }
-.animation-delay-800 { animation-delay: 0.8s; }
-.animation-delay-900 { animation-delay: 0.9s; }
-.animation-delay-1000 { animation-delay: 1s; }
-.animation-delay-2000 { animation-delay: 2s; }
-.animation-delay-3000 { animation-delay: 3s; }
-
 /* Loading Animation */
 @keyframes spin {
     to {
@@ -204,39 +110,6 @@ select:focus-visible {
 @keyframes border-rotate {
     to {
         --border-angle: 360deg;
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
     }
 }
 
@@ -260,71 +133,6 @@ select:focus-visible {
     }
 }
 
-@keyframes portraitFloat {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-        transform: translate(-50%, -52%) scale(1.02);
-    }
-}
-
-@keyframes wave {
-    0%, 100% {
-        transform: rotate(0deg);
-    }
-    25% {
-        transform: rotate(20deg);
-    }
-    75% {
-        transform: rotate(-10deg);
-    }
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: -200% center;
-    }
-    100% {
-        background-position: 200% center;
-    }
-}
-
-@keyframes bounceCustom {
-    0%, 20%, 53%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    40%, 43% {
-        transform: translateX(-50%) translateY(-15px);
-    }
-    70% {
-        transform: translateX(-50%) translateY(-5px);
-    }
-}
-
-@keyframes scrollWheel {
-    0% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(0);
-    }
-    10%, 90% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(16px);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-}
-
 /* Responsive Utilities */
 @media (max-width: 768px) {
     .text-responsive-sm {
@@ -337,35 +145,5 @@ select:focus-visible {
 
     .text-responsive-lg {
         font-size: clamp(2.5rem, 8vw, 5rem);
-    }
-}
-
-/* Print Styles */
-@media print {
-    .no-print {
-        display: none !important;
-    }
-}
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-/* High Contrast Mode */
-@media (prefers-contrast: more) {
-    .btn-primary {
-        border: 2px solid currentColor;
-    }
-
-    .card {
-        border: 2px solid currentColor;
     }
 }

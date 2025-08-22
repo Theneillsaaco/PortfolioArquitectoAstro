@@ -58,36 +58,10 @@ export default {
                 sans: ['Jost', 'system-ui', 'sans-serif'],
                 mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
             },
-            borderRadius: {
-                'xl': '1.25rem',
-                '2xl': '1.5rem',
-            },
-            boxShadow: {
-                'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
-                'glow': '0 0 20px rgba(75, 125, 73, 0.15)',
-            },
             animation: {
-                'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
-                'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
-                'slide-in-right': 'slideInRight 0.8s ease-out forwards',
-                'float': 'float 6s ease-in-out infinite',
-                'pulse-slow': 'pulse 3s ease-in-out infinite',
-                'bounce-soft': 'bounceSoft 2s infinite',
-                'shimmer': 'shimmer 3s ease-in-out infinite',
+                'float': 'float 6s ease-in-out infinite'
             },
             keyframes: {
-                fadeInUp: {
-                    '0%': { opacity: '0', transform: 'translateY(30px)' },
-                    '100%': { opacity: '1', transform: 'translateY(0)' }
-                },
-                slideInLeft: {
-                    '0%': { opacity: '0', transform: 'translateX(-30px)' },
-                    '100%': { opacity: '1', transform: 'translateX(0)' }
-                },
-                slideInRight: {
-                    '0%': { opacity: '0', transform: 'translateX(30px)' },
-                    '100%': { opacity: '1', transform: 'translateX(0)' }
-                },
                 float: {
                     '0%, 100%': { transform: 'translateY(0)' },
                     '50%': { transform: 'translateY(-20px)' }
@@ -96,13 +70,11 @@ export default {
                     '0%, 20%, 53%, 80%, 100%': { transform: 'translateY(0)' },
                     '40%, 43%': { transform: 'translateY(-15px)' },
                     '70%': { transform: 'translateY(-5px)' }
-                },
-                shimmer: {
-                    '0%': { backgroundPosition: '-200% center' },
-                    '100%': { backgroundPosition: '200% center' }
                 }
             }
         },
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/typography')
+    ],
 }
