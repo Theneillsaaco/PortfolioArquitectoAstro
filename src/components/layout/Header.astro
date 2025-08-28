@@ -39,11 +39,11 @@ const navLinks = [
             </div>
 
             <!-- Mobile Navigation -->
-            <div class="mobile-menu hidden md:hidden backdrop-blur-lg absolute top-full left-0 right-0 bg-cream-200/60 shadow-xl transition-all duration-500 ease-out opacity-0 -translate-y-5">
+            <div class="mobile-menu hidden md:hidden backdrop-blur-lg absolute top-full left-0 right-0 bg-cream-200/90 shadow-xl transition-all duration-500 ease-out opacity-0 -translate-y-5">
                 <div class="container mx-auto px-6 py-6">
                     <div class="flex flex-col space-y-4 text-center text-lg">
                         {navLinks.map(link => (
-                            <a href={link.href} class="px-4 py-3 rounded-lg transition hover:bg-white/10">
+                            <a href={link.href} class="px-4 py-3 rounded-lg transition hover:bg-white hover:text-accent-300">
                                 {link.label}
                             </a>
                         ))}
