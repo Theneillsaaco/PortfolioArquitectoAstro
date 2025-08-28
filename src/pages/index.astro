@@ -5,12 +5,21 @@ import HeroIndex from "../components/portfolio/HeroIndex.astro";
 import AboutMe from "../components/portfolio/AboutMe.astro";
 import Proyecto from "../components/portfolio/Proyecto.astro";
 import Contacto from "../components/portfolio/Contacto.astro";
+import SectionContainer from '../components/portfolio/SectionContainer.astro';
 ---
 
 <Layout title="Arquitecto - Inicio">
-    <HeroIndex />
-    <AboutMe />
+    <SectionContainer class="py-16 md:py-6">
+        <HeroIndex />
+    </SectionContainer>
+    <SectionContainer id="sobre-mi" class="py-16 md:py-6">
+        <AboutMe />
+    </SectionContainer>
     <Experience />
-    <Proyecto />
-    <Contacto />
+    <SectionContainer id="proyectos">
+        <Proyecto />
+    </SectionContainer>
+    <SectionContainer id="contacto" class="py-16">
+        <Contacto />
+    </SectionContainer>
 </Layout>
