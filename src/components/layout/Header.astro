@@ -58,9 +58,14 @@ const navLinks = [
     document.addEventListener("DOMContentLoaded", () => {
         const mobileMenuBtn = document.getElementById("mobileMenuBtn");
         const mobileMenu = document.querySelector(".mobile-menu");
+        let isAnimating = false;
 
         if (mobileMenuBtn && mobileMenu) {
             mobileMenuBtn.addEventListener("click", () => {
+                if (isAnimating) return;
+                
+                isAnimating = true;
+
                 mobileMenuBtn.classList.toggle("active");
 
                 if (mobileMenu.classList.contains("hidden")) {
@@ -69,12 +74,18 @@ const navLinks = [
                         mobileMenu.classList.add("opacity-100", "translate-y-0");
                         mobileMenu.classList.remove("opacity-0", "-translate-y-5");
                     });
+
+                    mobileMenu.addEventListener("transitionend", () => {
+                        isAnimating = false;
+                    }, { once: true });
                 } else {
                     mobileMenu.classList.remove("opacity-100", "translate-y-0");
                     mobileMenu.classList.add("opacity-0", "-translate-y-5");
-                    setTimeout(() => {
+                    
+                    mobileMenu.addEventListener("transitionend", () => {
                         mobileMenu.classList.add("hidden");
-                    }, 500);
+                        isAnimating = false;
+                    }, { once: true });
                 }
             });
         }
