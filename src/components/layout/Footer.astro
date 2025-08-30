@@ -1,0 +1,99 @@
+---
+import { Icon } from 'astro-icon/components'; 
+
+const anteproyecto = [
+    { name: 'Anteproyecto', href: '#' },
+    { name: 'Proyecto Ejecutivo', href: '#' },
+    { name: 'Direccion de Obra', href: '#' },
+    { name: 'Gerenciamiento', href: '#' }
+];
+
+const contacto = [
+    { text: 'Bávaro, Punta Cana, República Dominicana', icon: 'mdi:map-marker' },
+    { text: '+1 829 xxx xxx', icon: 'mdi:phone' },
+    { text: 'exaple', icon: 'mdi:email' } 
+];
+
+const social = [
+    { name: 'Linkedin', href: '#', icon: 'mdi:linkedin', color: 'hover:bg-blue-600' },
+    { name: 'Pinterest', href: '#', icon: 'mdi:pinterest', color: 'hover:bg-red-500' },
+    { name: 'WhatsApp', href: '#', icon: 'mdi:whatsapp', color: 'hover:bg-green-500'}
+];
+---
+<footer class="text-dark pb-4">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <!--Company Info -->
+            <div>
+                <div class="flex items-center mb-6">
+                    <Icon name="logo" class="w-8 h-8 mr-3" />
+                    <h5 class="text-xl font-bold">Estudio de Arquitectura</h5>
+                </div>
+                <p class="leading-relaxed text-cream-900">
+                    Diseñamos espacios únicos que reflejan las necesidades y deseos
+                    de quienes los habitarán, con pasión por cada detalle.
+                </p>
+            </div>
+            
+
+            <!-- Services -->
+            <div>
+                <h6 class="text-lg font-semibold mb-4 relative inline-block">
+                    Servicios
+                    <span class="absolute bottom-0 left-0 w-8 h-0.5 bg-red-500" />
+                </h6>
+                <ul class="space-y-2">
+                    {anteproyecto.map(item => (
+                        <li class="flex items-center text-cream-900 hover:text-accent-300 transition transform hover:translate-x-1 duration-300">
+                            <Icon name="generic/arrow" class="w-4 h-4 mr-2" />
+                            <a href={item.href} class="hover:underline">{item.name}</a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h6 class="text-lg font-semibold mb-4 relative inline-block">
+                    Contacto
+                    <span class="absolute bottom-0 left-0 w-8 h-0.5 bg-red-500" />
+                </h6>
+                <div class="space-y-3">
+                    {contacto.map(con => (
+                        <div class="flex items-center text-cream-900 hover:text-accent-300 transition transform hover:translate-x-1 duration-300">
+                            <Icon name={con.icon} class="w-4 h-4 mr-3" />
+                            <span>{con.text}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Social -->
+            <div class="mb-8">
+                <h6 class="text-lg font-semibold mb-4 relative inline-block">
+                    Siguenos
+                    <spam class="absolute bottom-0 left-0 w-8 h-0.5 bg-red-500" />
+                </h6>
+                <div class="flex flex-wrap gap-3">
+                    {social.map(soc => (
+                        <a href={soc.href} class={`w-12 h-12 bg-dark rounded-full flex items-center justify-center text-dark transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:shadow-lg ${soc.color}`}>
+                            <Icon name={soc.icon} class="w-5 h-5" />
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="border-t border-dark mt-8 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>© {new Date().getFullYear()} Estudio de Arquitectura.</p>
+                <p class="text-sm flex items-center">
+                    Desarrollado con
+                    <Icon name="mdi:heart" class="w-4 h-4 mx-1 text-red-500 " />
+                    y con Astro
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>

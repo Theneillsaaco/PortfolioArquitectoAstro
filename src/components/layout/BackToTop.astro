@@ -1,0 +1,32 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<button
+    id="backToTop"
+    title="Volver arriba"
+    aria-label="Volver arriba"
+    class="fixed bottom-8 right-8 flex items-center justify-center w-12 h-12 rounded-full shadow-lg backdorp-blur-sm bg-cream-100/50 text-dark transition-all duration-300 z-50 opacity-0 invisible hover:scale-110 hover:shadow-xl hover:animate-pulse"
+>
+    <Icon name="mdi:arrow-up" class="w-6 h-6 block" />
+</button>
+
+<script>
+    const backToTop = document.getElementById('backToTop');
+
+    if (backToTop) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 800) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('visible', 'opacity-100');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+</script>
