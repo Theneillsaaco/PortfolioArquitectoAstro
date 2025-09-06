@@ -3,7 +3,7 @@ import { Icon } from 'astro-icon/components';
 
 const navLinks = [
   { href: "/PortfolioArquitectoAstro", label: "Inicio", icon: "portfolio/Home" },
-  { href: "/PortfolioArquitectoAstro/proyect", label: "Proyectos", icon: "portfolio/Proyecto" },
+  { href: "/PortfolioArquitectoAstro/projects", label: "Proyectos", icon: "portfolio/Proyecto" },
   { href: "/PortfolioArquitectoAstro/contacto", label: "Contacto", icon: "mdi:email" },
 ];
 ---
@@ -12,7 +12,7 @@ const navLinks = [
     <div class="container mx-auto px-6">
         <div class="flex items-center justify-between">
             <!-- Logo -->
-            <a href="/" class="flex items-center text-dark text-xl font-bold transition-all duration-300 hover:text-yellow-400 hover:-translate-y-1">
+            <a href="/PortfolioArquitectoAstro" class="flex items-center text-dark text-xl font-bold transition-all duration-300 hover:text-yellow-400 hover:-translate-y-1">
                 <Icon class="w-8 h-8 mr-3" name="logo" />
                 <span class="tracking-wide font-serif">Arquitecto</span>
             </a>
