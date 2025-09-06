@@ -45,8 +45,9 @@ const categories = Array.from(
             class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
             {projects.map((proj, i) => (
-                <div
-                    class="portfolio-card bg-white rounded-2xl overflow-hidden shadow-lg border border-cream-200 hover:shadow-2xl hover:-translate-y-4 transition-transform duration-500 group opacity-100 scale-100"
+                <a
+                    href={`/PortfolioArquitectoAstro/project/${proj.slug}`}
+                    class="portfolio-card bg-white rounded-2xl overflow-hidden shadow-lg border border-cream-200 hover:shadow-2xl hover:-translate-y-4 transition-transform duration-500 group opacity-100 scale-100 block focus:outline-none focus:ring-2 focus:ring-primary-500"
                     data-category={proj.data.type.toLowerCase()}
                     data-index={i}
                     role="article"
@@ -61,13 +62,13 @@ const categories = Array.from(
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         />
                         <div class="card-overlay absolute inset-0 bg-gradient-to-br from-primary-500/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <button
+                            <span
                                 class="bg-white text-cream-800 px-6 py-3 rounded-full font-semibold hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex items-center gap-2"
-                                aria-label={`Var detalles del proyecto ${proj.data.title}`}
+                                aria-label={`Ver detalles del proyecto ${proj.data.title}`}
                             >
                                 <Icon class="w-5 h-5" name="portfolio/Eyes" />
                                 Ver Proyecto
-                            </button>
+                            </span>
                         </div>
                     </div>
 
@@ -92,7 +93,7 @@ const categories = Array.from(
                             </span>
                         </div>
                     </div>
-                </div>
+                </a>
             ))}
         </div>
 
@@ -104,6 +105,7 @@ const categories = Array.from(
                 iconName="portfolio/Arrow"
                 animatedBorder={true}
                 iconAfterText={true}
+                link="/PortfolioArquitectoAstro/projects"
             />
         </div>
     </div>
