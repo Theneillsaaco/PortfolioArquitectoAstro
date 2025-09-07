@@ -1,7 +1,7 @@
 ﻿---
 import { Icon } from "astro-icon/components";
 
-type ButtonVariant = "primary" | "secondary" | "outline";
+type ButtonVariant = "filled" | "tonal" | "outline";
 
 export interface Props {
     link?: string;
@@ -24,8 +24,8 @@ const {
     link,
     text,
     iconName,
-    iconAfterText  = false,
-    variant = "primary",
+    iconAfterText = false,
+    variant = "filled",
     ariaLabel,
     disabled = false,
     isLoading = false,
@@ -39,81 +39,69 @@ const {
 
 // Clases base
 const baseClasses = `
-    btn-${variant}
-    border-2
-    group
-    flex
-    items-center
-    justify-center
-    cursor-pointer
-    transition-all
-    ease-in-out
-    rounded-lg
-    font-medium
-    disabled:opacity-50
-    disabled:cursor-not-allowed
-    hover:scale-105
+    relative inline-flex items-center justify-center
+    rounded-full font-medium
+    transition-all duration-200 ease-in-out
+    cursor-pointer hover:scale-105
+    disabled:opacity-50 disabled:cursor-not-allowed
+    focus-visible:outline-none focus:ring-2 focus:ring-offset-2
+    px-6 py-3
 `;
 
 // Variantes específicas los estilos
 const variantClasses = {
-    primary: `
-        text-cream-900
-        bg-cream-300
+    filled: `
+        bg-primary-500 text-white
+        hover:bg-primary-600
+        focus:ring-primary-500
         border-transparent
-        hover:bg-secondary-500 
-        hover:text-white 
-        px-6 py-3
         ${animatedBorder ? 'hover:shadow-lg hover:shadow-cream-300/30' : ''}
     `,
-    secondary: `
-        bg-secondary-500
-        border-transparent
-        hover:bg-secondary-600 
-        hover:text-white 
-        px-6 py-3
-        ${animatedBorder ? 'hover:shadow-lg hover:shadow-secondary-500/30' : ''}
+    tonal: `
+        bg-secondary-100 text-secondary-900
+        hover:bg-secondary-200 
+        focus:ring-secondary-500
+        border border-transparent
+        ${animatedBorder ? ' hover:shadow-lg hover:shadow-secondary-500/30' : ''}
     `,
     outline: `
-        border-primary-500 
-        hover:bg-primary-500 
-        bg-accent-50 
-        hover:text-white 
-        text-primary-500 
-        px-6 py-3
+        bg-accent-50
+        border border-primary-500 text-primary-500
+        hover:bg-primary-100
+        focus:ring-primary-500
         ${animatedBorder ? 'hover:shadow-lg hover:shadow-primary-500/30' : ''}
     `
 };
 
 // Clases de borde animado
 const borderAnimationClasses = {
-    primary: `
+    filled: `
         w-fit h-fit
         bg-conic-primary
         animate-rotate-border
         p-px
-        rounded-lg
+        rounded-full
     `,
-    secondary: `
+    tonal: `
         w-fit h-fit
         bg-conic-secondary
         animate-rotate-border
         p-px
-        rounded-lg
+        rounded-full
     `,
     outline: `
         w-fit h-fit
         bg-conic-outline
         animate-rotate-border
         p-px
-        rounded-lg
+        rounded-full
     `
 }
 
 // Clases para iconos
-const iconClasses = "w-5 h-5 mr-2";
+const iconClasses = "w-5 h-5";
 
-const buttonClasses = `${baseClasses} ${variantClasses[variant]}`;
+const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${className}`;
 
 // Generar aria-label si no se proporciona
 const buttonAriaLabel = ariaLabel || (iconName ? `${text} ${iconName}` : text);
@@ -129,7 +117,10 @@ const externalAttributes = isExternalLink ? {
 
 // Estado de carga
 const loadingText = isLoading ? 'Cargando...' : text;
-const loadingAriaLabel = isLoading ? `${buttonAriaLabel} - Cargando` : buttonAriaLabel;
+const loadingAriaLabel = isLoading 
+    ? `${buttonAriaLabel} - Cargando` 
+    : buttonAriaLabel
+;
 
 // Determinar el onclick
 const onClickHandler = onClick || (scrollTarget ? `scrollToSection('${scrollTarget}')` : undefined);
@@ -142,7 +133,7 @@ const useButton = !link || scrollTarget || onClick;
     <div class={borderAnimationClasses[variant]}>
         {useButton ? (
             <button
-                class:list={[buttonClasses, className]}
+                class:list={buttonClasses}
                 onclick={onClickHandler}
                 aria-label={loadingAriaLabel}
                 disabled={disabled}
@@ -153,20 +144,44 @@ const useButton = !link || scrollTarget || onClick;
                 {iconAfterText ? (
                     <>
                         {loadingText}
-                        {iconName && <Icon name={iconName} class={iconClasses} aria-hidden="true" />}
-                        {isLoading && <Icon name="mdi:loading" class="animate-spin w-5 h-5 mr-2" aria-hidden="true" />}
+                        {iconName && 
+                            <Icon 
+                                name={iconName} 
+                                class={`${iconClasses} ml-2`} 
+                                aria-hidden="true" 
+                            />
+                        }
+                        {isLoading && 
+                            <Icon 
+                                name="mdi:loading" 
+                                class="animate-spin w-5 h-5 ml-2" 
+                                aria-hidden="true" 
+                            />
+                        }
                     </>
                 ) : (
                     <>
-                        {iconName && <Icon name={iconName} class={iconClasses} aria-hidden="true" />}
-                        {isLoading && <Icon name="mdi:loading" class="animate-spin w-5 h-5 mr-2" aria-hidden="true" />}
+                        {iconName && 
+                            <Icon 
+                                name={iconName} 
+                                class={`${iconClasses} mr-2`} 
+                                aria-hidden="true" 
+                            />
+                        }
+                        {isLoading && 
+                            <Icon 
+                                name="mdi:loading" 
+                                class="animate-spin w-5 h-5 mr-2" 
+                                aria-hidden="true" 
+                            />
+                        }
                         {loadingText}
                     </>
                 )}
             </button>
         ) : (
             <a
-                class:list={[buttonClasses, className]}
+                class:list={buttonClasses}
                 href={disabled ? '#' : link}
                 aria-label={loadingAriaLabel}
                 role="button"
@@ -178,13 +193,37 @@ const useButton = !link || scrollTarget || onClick;
                 {iconAfterText ? (
                     <>
                         {loadingText}
-                        {iconName && <Icon name={iconName} class={iconClasses} aria-hidden="true" />}
-                        {isLoading && <Icon name="mdi:loading" class="animate-spin w-5 h-5 mr-2" aria-hidden="true" />}
+                        {iconName && 
+                            <Icon 
+                                name={iconName} 
+                                class={`${iconClasses} ml-2`} 
+                                aria-hidden="true" 
+                            />
+                        }
+                        {isLoading && 
+                            <Icon 
+                                name="mdi:loading" 
+                                class="animate-spin w-5 h-5 ml-2" 
+                                aria-hidden="true" 
+                            />
+                        }
                     </>
                 ) : (
                     <>
-                        {iconName && <Icon name={iconName} class={iconClasses} aria-hidden="true" />}
-                        {isLoading && <Icon name="mdi:loading" class="animate-spin w-5 h-5 mr-2" aria-hidden="true" />}
+                        {iconName && 
+                            <Icon 
+                                name={iconName} 
+                                class={`${iconClasses} mr-2`} 
+                                aria-hidden="true" 
+                            />
+                        }
+                        {isLoading && 
+                            <Icon 
+                                name="mdi:loading" 
+                                class="animate-spin w-5 h-5 mr-2" 
+                                aria-hidden="true" 
+                            />
+                        }
                         {loadingText}
                     </>
                 )}
@@ -195,7 +234,7 @@ const useButton = !link || scrollTarget || onClick;
     <>
         {useButton ? (
             <button
-                class:list={[buttonClasses, className]}
+                class:list={buttonClasses}
                 onclick={onClickHandler}
                 aria-label={loadingAriaLabel}
                 disabled={disabled}
@@ -206,20 +245,44 @@ const useButton = !link || scrollTarget || onClick;
                 {iconAfterText ? (
                     <>
                         {loadingText}
-                        {iconName && <Icon name={iconName} class={iconClasses} aria-hidden="true" />}
-                        {isLoading && <Icon name="mdi:loading" class="animate-spin w-5 h-5 mr-2" aria-hidden="true" />}
+                        {iconName && 
+                            <Icon 
+                                name={iconName} 
+                                class={`${iconClasses} ml-2`} 
+                                aria-hidden="true" 
+                            />
+                        }
+                        {isLoading && 
+                            <Icon 
+                                name="mdi:loading" 
+                                class="animate-spin w-5 h-5 ml-2" 
+                                aria-hidden="true" 
+                            />
+                        }
                     </>
                 ) : (
                     <>
-                        {iconName && <Icon name={iconName} class={iconClasses} aria-hidden="true" />}
-                        {isLoading && <Icon name="mdi:loading" class="animate-spin w-5 h-5 mr-2" aria-hidden="true" />}
+                        {iconName && 
+                            <Icon 
+                                name={iconName} 
+                                class={`${iconClasses} mr-2`} 
+                                aria-hidden="true" 
+                            />
+                        }
+                        {isLoading && 
+                            <Icon 
+                                name="mdi:loading" 
+                                class="animate-spin w-5 h-5 mr-2" 
+                                aria-hidden="true" 
+                            />
+                        }
                         {loadingText}
                     </>
                 )}
             </button>
-                ) : (
+        ) : (
             <a
-                class:list={[buttonClasses, className]}
+                class:list={buttonClasses}
                 href={disabled ? '#' : link}
                 aria-label={loadingAriaLabel}
                 role="button"
@@ -231,13 +294,37 @@ const useButton = !link || scrollTarget || onClick;
                 {iconAfterText ? (
                     <>
                         {loadingText}
-                        {iconName && <Icon name={iconName} class={iconClasses} aria-hidden="true" />}
-                        {isLoading && <Icon name="mdi:loading" class="animate-spin w-5 h-5 mr-2" aria-hidden="true" />}
+                        {iconName && 
+                            <Icon 
+                                name={iconName} 
+                                class={`${iconClasses} ml-2`} 
+                                aria-hidden="true" 
+                            />
+                        }
+                        {isLoading && 
+                            <Icon 
+                                name="mdi:loading" 
+                                class="animate-spin w-5 h-5 ml-2" 
+                                aria-hidden="true" 
+                            />
+                        }
                     </>
                 ) : (
                     <>
-                        {iconName && <Icon name={iconName} class={iconClasses} aria-hidden="true" />}
-                        {isLoading && <Icon name="mdi:loading" class="animate-spin w-5 h-5 mr-2" aria-hidden="true" />}
+                        {iconName && 
+                            <Icon 
+                                name={iconName} 
+                                class={`${iconClasses} mr-2`} 
+                                aria-hidden="true" 
+                            />
+                        }
+                        {isLoading && 
+                            <Icon 
+                                name="mdi:loading" 
+                                class="animate-spin w-5 h-5 mr-2" 
+                                aria-hidden="true" 
+                            />
+                        }
                         {loadingText}
                     </>
                 )}

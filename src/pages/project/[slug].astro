@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
+import Button from "../../components/ui/Button.astro";
 
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
@@ -139,12 +140,13 @@ const { Content } = await project.render();
                 <div class="bg-primary-100 rounded-2xl p-6 shadow-md">
                     <h3 class="text-lg font-semibold text-on-primary-800 mb-2">¿Te interesa este proyecto?</h3>
                     <p class="text-on-primary-700 text-sm mb-4">Contáctanos para conocer más detalles sobre este proyecto.</p>
-                    <a 
-                        href="/PortfolioArquitectoAstro/contact" 
-                        class="inline-flex items-center justify-center w-full px-4 py-2 rounded-xl bg-primary-500 text-white font-medium hover:bg-primary-600 transition-colors"
-                    >
-                        Contactar
-                    </a>
+                    <div class="flex flex-col">
+                        <Button 
+                            text="Contactar"
+                            variant="filled"
+                            link="/PortfolioArquitectoAstro/contact"
+                        />
+                    </div>
                 </div>
             </aside>
         </div>
