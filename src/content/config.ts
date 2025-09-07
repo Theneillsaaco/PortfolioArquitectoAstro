@@ -10,7 +10,7 @@ const projects = defineCollection({
         meters: z.union([z.string(), z.number()]),
         tags: z.array(z.string()),
         img: z.object({
-            cover: z.string().url(),
+            cover: z.string(),
             secondary: z.string().optional(),
             others: z.array(z.string()).optional(),
         })

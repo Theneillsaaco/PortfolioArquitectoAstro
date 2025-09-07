@@ -7,7 +7,7 @@ location: Santiago, RD
 meters: 350m²
 tags: ["Residencial", "Casa", "Arquitectura"]
 img:
-  cover: https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80
+  cover: "../../../PortfolioArquitectoAstro/Projects/project-img-1.webp"
   secondary: ""
   Others: []  
 ---

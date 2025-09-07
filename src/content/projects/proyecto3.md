@@ -7,7 +7,7 @@ location: Moca, RD
 meters: 800m²
 tags: ["Centro Cultural", "Arquitectura"]
 img:
-  cover: https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80
+  cover: "../../../PortfolioArquitectoAstro/Projects/project-img-3.webp"
   secondary: ""
   Others: []  
 ---
