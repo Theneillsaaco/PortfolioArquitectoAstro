@@ -8,30 +8,30 @@ const navLinks = [
 ];
 ---
 
-<nav id="mainNavbar" class="navbar fixed w-full top-0 z-50 bg-cream-300/30 backdrop-blur-md transition-all duration-300 py-4 shadow-lg">
-    <div class="container mx-auto px-6">
-        <div class="flex items-center justify-between">
+<nav id="mainNavbar" class="fixed w-full top-0 z-50 bg-cream-100/30 backdrop-blur-md transition-all duration-300 py-4 shadow-sm">
+    <div class="container mx-auto px-4 md:px-6">
+        <div class="flex items-center justify-between h-16">
             <!-- Logo -->
-            <a href="/PortfolioArquitectoAstro" class="flex items-center text-dark text-xl font-bold transition-all duration-300 hover:text-yellow-400 hover:-translate-y-1">
-                <Icon class="w-8 h-8 mr-3" name="logo" />
-                <span class="tracking-wide font-serif">Arquitecto</span>
+            <a href="/PortfolioArquitectoAstro" class="flex items-center text-cream-900 text-lg font-semibold transition hover:text-accent-500 hover:-translate-y-1">
+                <Icon class="w-7 h-7 mr-2" name="logo" />
+                <span class="tracking-wide">Arquitecto</span>
             </a>
 
             <!-- Mobile menu button -->
             <button 
                 id="mobileMenuBtn"
-                class="md:hidden relative w-11 h-11 flex flex-col justify-center items-center rounded-xl bg-white/20 backdrop-blur-md shadow-sm border border-white/30 transition hover:bg-white/30 active:scale-95 group ml-auto"
+                class="md:hidden relative w-10 h-10 flex justify-center items-center rounded-lg bg-cream-200 text-cream-800 backdrop-blur-md shadow-sm border border-cream-400 transition hover:bg-primary-100 active:scale-95"
             >
-                <span class="line block absolute w-6 h-[3px] bg-gray-600 rounded-full transition-all duration-300"></span>
-                <span class="line block absolute w-6 h-[3px] bg-gray-600 rounded-full transition-all duration-300"></span>
+                <span class="line block absolute w-6 h-[2px] bg-cream-900 rounded transition-all duration-300" />
+                <span class="line block absolute w-6 h-[2px] bg-cream-900 rounded transition-all duration-300" />
             </button>
 
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center space-x-8">
+            <div class="hidden md:flex items-center space-x-6">
                 {navLinks.map(link => (
-                    <a href={link.href} class="nav-link text-dark font-medium px-4 py-2 rounded-lg transition-all duration-300 hover:bg-red-500/10 hover:-translate-y-1 relative overflow-hidden">
+                    <a href={link.href} class="flex items-center gap-2 text-cream-900 font-medium px-3 py-2 rounded-full transition hover:bg-primary-100 hover:text-primary-600 hover:-translate-y-1 relative overflow-hidden">
                         <span class="flex items-center">
-                            <Icon class="w-4 h-4 mr-2" name={link.icon} />
+                            <Icon class="w-5 h-5 mr-2" name={link.icon} />
                             {link.label}
                         </span>
                     </a>
@@ -39,11 +39,11 @@ const navLinks = [
             </div>
 
             <!-- Mobile Navigation -->
-            <div class="mobile-menu hidden md:hidden backdrop-blur-lg absolute top-full left-0 right-0 bg-cream-200/90 shadow-xl transition-all duration-500 ease-out opacity-0 -translate-y-5">
-                <div class="container mx-auto px-6 py-6">
-                    <div class="flex flex-col space-y-4 text-center text-lg">
+            <div class="mobile-menu hidden md:hidden backdrop-blur-lg absolute top-full left-0 right-0 bg-cream-200/90 shadow-md transition-all duration-500 ease-out opacity-0 -translate-y-5">
+                <div class="container mx-auto px-6 py-4">
+                    <div class="flex flex-col space-y-3 text-center text-base">
                         {navLinks.map(link => (
-                            <a href={link.href} class="px-4 py-3 rounded-lg transition hover:bg-white hover:text-accent-300">
+                            <a href={link.href} class="px-4 py-3 rounded-lg transition hover:bg-primary-100 hover:text-primary-600">
                                 {link.label}
                             </a>
                         ))}
@@ -94,9 +94,9 @@ const navLinks = [
         if (navbar) {
             window.addEventListener("scroll", () => {
                 if (window.scrollY > 100) {
-                    navbar.classList.add("shadow-2xl", "backdrop-blur-xl");
+                    navbar.classList.add("shadow-md", "backdrop-blur-xl");
                 } else {
-                    navbar.classList.remove("shadow-2xl", "backdrop-blur-xl");
+                    navbar.classList.remove("shadow-md", "backdrop-blur-xl");
                 }
             });
         }
@@ -105,11 +105,11 @@ const navLinks = [
 
 <style>
     #mobileMenuBtn .line:nth-child(1) {
-        transform: translateY(-6px);
+        transform: translateY(-5px);
     }
 
     #mobileMenuBtn .line:nth-child(2) {
-        transform: translateY(6px);
+        transform: translateY(5px);
     }
 
     #mobileMenuBtn.active .line:nth-child(1) {
