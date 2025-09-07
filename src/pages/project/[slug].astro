@@ -28,7 +28,7 @@ const { Content } = await project.render();
         />
         <div class="absolute inset-0 bg-gradient-to-t from-cream-100/90 via-cream-100/60 to-transparent flex items-end">
             <div class="max-w-7xl mx-auto px-6 pb-12">
-                <span class="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-700 backdrop-blur-sm mb-4">
+                <span class="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium bg-primary-200/70 text-primary-700 backdrop-blur-sm mb-4">
                     {project.data.type}
                 </span>
                 <h1 class="text-4xl lg:text-6xl font-bold tracking-tight mb-4">
@@ -40,13 +40,15 @@ const { Content } = await project.render();
             </div>
 
             <!-- Botón Volver -->
-            <a 
-                href="/PortfolioArquitectoAstro/projects" 
-                class="absolute top-6 left-6 inline-flex items-center px-4 py-2 bg-cream-200/80 backdrop-blur-md text-cream-900 rounded-xl shadow-sm hover:bg-cream-300 transition-colors"
-            >
-                <Icon name="mdi:arrow-left" class="w-5 h-5 mr-2" />
-                Volver
-            </a>
+            <div class="absolute top-6 left-6">
+                <Button 
+                    text="Volver"
+                    variant="outline"
+                    iconName="mdi:arrow-left"
+                    iconAfterText={true}
+                    link="/PortfolioArquitectoAstro/projects"
+                />
+            </div>
         </div>
     </section>
 
