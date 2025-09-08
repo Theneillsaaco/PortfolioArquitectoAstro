@@ -3,13 +3,22 @@ import Heading from "../ui/Heading.astro"
 import { Icon } from "astro-icon/components"
 
 const points = [
-    { icon: "portfolio/Bulb", title: "Diseño Inteligente", desc: "Cada espacio debe contar una historia única"},
+    { icon: "mdi:lightbulb", title: "Diseño Inteligente", desc: "Cada espacio debe contar una historia única"},
     { icon: "mdi:heart", title: "Conexión Emocional", desc: "Arquitectura que conecta con las emociones" },
-    { icon: "", title: "Sostenibilidad", desc: "Respeto por el contexto cultural y ambiental" }
+    { icon: "mdi:leaf", title: "Sostenibilidad", desc: "Respeto por el contexto cultural y ambiental" }
+];
+
+const skills = [
+    { name: "AutoCAD", icon: "mdi:vector-square" },
+    { name: "Revit", icon: "mdi:home-modern" },
+    { name: "SketchUp", icon: "mdi:cube" },
+    { name: "Fusion 360", icon: "mdi:cog-outline" },
+    { name: "Photoshop", icon: "mdi:brush" },
+    { name: "Illustrator", icon: "mdi:palette" }
 ];
 ---
 
-<div class="bg-cream-50">
+<div class="bg-cream-50 py-20 relative overflow-hidden">
     <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <!-- Left Visual -->
@@ -33,14 +42,14 @@ const points = [
 
             <!-- Right Content -->
             <div class="about-content lg:pl-8">
-                <div class="inline-flex items-center gap-2 bg-primary-500/20 px-4 py-2 rounded-full text-sm font-semibold upprcase tracking-wide mb-6">
-                    <Icon class="w-4 h-4" name="portfolio/Person" />
+                <div class="inline-flex items-center gap-2 bg-primary-500/15 px-4 py-2 rounded-full text-sm font-medium upprcase tracking-wide text-primary-700 mb-6">
+                    <Icon class="w-4 h-4 text-primary-600" name="mdi:account" />
                     <span>Sobre mi</span>
                 </div>
 
                 <Heading text="Transformando ideas en" textGradient="espacios unicos" level={2} />
 
-                <p class="py-4 text-lg text-crean-700 mb-12 leading-relaxed">
+                <p class="py-6 text-lg text-secondary-600 mb-10 leading-relaxed max-w-xl">
                     Mi pasión por la arquitectura nació de la fascinación por cómo los espacios
                     pueden transformar vidas. Desde Santiago, República Dominicana, he desarrollado
                     una filosofía de diseño que combina funcionalidad inteligente, belleza atemporal
@@ -48,19 +57,32 @@ const points = [
                 </p>
 
                 <!-- Philosophy Points -->
-                <div class="space-y-8">
+                <div class="space-y-6 mb-12">
                     {points.map(point => (
                         <div class="flex items-start gap-4">
-                            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-cream-400 to-cream-300 rounded-xl flex items-center justify-center text-dark shadow-md">
-                                {point.icon && <Icon class="w-6 h-6" name={point.icon} />}
+                            <div class="flex-shrink-0 w-12 h-12 bg-cream-200 rounded-xl flex items-center justify-center shadow-sm">
+                                {point.icon && <Icon class="w-6 h-6 text-accent-600" name={point.icon} />}
                             </div>
                             <div>
-                                <h6 class="font-bold text-cream-900 mb-1">{point.title}</h6>
-                                <p class="text-cream-700">{point.desc}</p>
+                                <h6 class="font-semibold text-primary-900 mb-1">{point.title}</h6>
+                                <p class="text-primary-600">{point.desc}</p>
                             </div>
                         </div>
                     ))}
                 </div>
+
+                <!-- Skills -->
+                 <div>
+                    <h6 class="font-semibold text-primary-900 mb-4">Habilidades</h6>
+                    <div class="flex flex-wrap gap-3">
+                        {skills.map(skill => (
+                            <div class="flex items-center gap-2 px-4 py-2 bg-cream-100 rounded-full shadow-sm hover:shadow-md transition text-sm text-primary-800">
+                                <Icon name={skill.icon} class="w-4 h-4 text-accent-600" />
+                                <span>{skill.name}</span>
+                            </div>
+                        ))}
+                    </div>
+                 </div>
             </div>
         </div>
     </div>
