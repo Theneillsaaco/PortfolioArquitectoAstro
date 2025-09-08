@@ -43,27 +43,27 @@ const EXPERIENCE = [
 
 ---
 
-<section id="experience" class="scroll-20 w-full mx-auto max-w-4xl py-20 bg-cream-50 scroll-m-16">
+<section id="experience" class="w-full mx-auto max-w-4xl py-20 bg-cream-50">
     <div class="flex flex-col gap-12">
-        <div class="flex flex-col gap-4 items-center justify-center">
-            <div class="inline-flex items-center gap-2 bg-primary-500/20 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide mb-6">
-                <Icon class="w-4 h-4" name="portfolio/Clock" />
+        <div class="flex flex-col gap-4 items-center text-center">
+            <div class="inline-flex items-center gap-2 bg-primary-500/15 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide text-primary-700">
+                <Icon class="w-4 h-4 text-primary-600" name="portfolio/Clock" />
                 <span>Experincia</span>
             </div>
+
             <Heading text="Work" textGradient="Experience" level={2} />
-            <p class="text-cream-700 max-w-2xl">
+
+            <p class="text-secondary-600 max-w-2xl">
                 Un recorrido de hitos profesionales que muestran mi crecimiento y pasión por la arquitectura.
             </p>
         </div>
 
-        <ol class="relative mt-16" aria-label="Professional experience">
-            {
-                EXPERIENCE.map(experience => (
-                    <li class="">
-                        <ExperienceItem {...experience} />
-                    </li>
-                ))
-            }
+        <ol class="relative mt-16 space-y-4 px-4" aria-label="Professional experience">
+            {EXPERIENCE.map(experience => (
+                <li>
+                    <ExperienceItem {...experience} />
+                </li>
+            ))}
         </ol>
     </div>
 </section>
