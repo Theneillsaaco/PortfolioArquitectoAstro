@@ -120,7 +120,7 @@ const categories = Array.from(
 </div>
 
 <script type="module" is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("astro:page-load", () => {
         const filterButtons = document.querySelectorAll(".filter-btn");
         const portfolioCards = document.querySelectorAll(".portfolio-card");
         const MAX_VISIBLE = 6;
