@@ -54,54 +54,80 @@ const navLinks = [
     </div>
 </nav>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-        const mobileMenu = document.querySelector(".mobile-menu");
-        let isAnimating = false;
+<script is:inline>
+    (function () {
+        let controller;
 
-        if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener("click", () => {
-                if (isAnimating) return;
-                
-                isAnimating = true;
+        function setupNavbar() {
+            controller?.abort();
+            controller = new AbortController();
+            const { signal } = controller;
 
-                mobileMenuBtn.classList.toggle("active");
+            const btn = document.getElementById("mobileMenuBtn");
+            const menu = document.querySelector(".mobile-menu");
+            const navbar = document.getElementById("mainNavbar");
 
-                if (mobileMenu.classList.contains("hidden")) {
-                    mobileMenu.classList.remove("hidden");
-                    requestAnimationFrame(() => {
-                        mobileMenu.classList.add("opacity-100", "translate-y-0");
-                        mobileMenu.classList.remove("opacity-0", "-translate-y-5");
-                    });
+            if (!btn || !menu) return;
 
-                    mobileMenu.addEventListener("transitionend", () => {
-                        isAnimating = false;
-                    }, { once: true });
-                } else {
-                    mobileMenu.classList.remove("opacity-100", "translate-y-0");
-                    mobileMenu.classList.add("opacity-0", "-translate-y-5");
-                    
-                    mobileMenu.addEventListener("transitionend", () => {
-                        mobileMenu.classList.add("hidden");
-                        isAnimating = false;
-                    }, { once: true });
-                }
+            function instantClose() {
+                btn.classList.remove("active");
+                menu.classList.add("hidden", "opacity-0", "-translate-y-5");
+                menu.classList.remove("opacity-100", "translate-y-0");
+            }
+
+            function openMenu() {
+                btn.classList.add("active");
+                menu.classList.remove("hidden");
+                requestAnimationFrame(() => {
+                    menu.classList.add("opacity-100", "translate-y-0");
+                    menu.classList.remove("opacity-0", "-translate-y-5");
+                });
+            }
+
+            function closeMenu() {
+                btn.classList.remove("active");
+                menu.classList.remove("opacity-100", "translate-y-0");
+                menu.classList.add("opacity-0", "-translate-y-5");
+
+                let ended = false;
+                const onEnd = () => {
+                    if (ended) return;
+                    ended = true;
+                    menu.classList.add("hidden");
+                };
+
+                menu.addEventListener("transitionend", onEnd, { once: true, signal });
+                setTimeout(onEnd, 350); 
+            }
+
+            btn.addEventListener("click", () => {
+                if (menu.classList.contains("hidden")) openMenu();
+                    else closeMenu();
+                }, { signal } 
+            );
+
+            menu.querySelectorAll("a").forEach((a) => {
+                a.addEventListener("click", closeMenu, { signal });
             });
-        }
 
-        const navbar = document.getElementById("mainNavbar");
-        if (navbar) {
-            window.addEventListener("scroll", () => {
+            function onScroll() {
                 if (window.scrollY > 100) {
-                    navbar.classList.add("shadow-md", "backdrop-blur-xl");
+                    navbar?.classList.add("shadow-md", "backdrop-blur-xl");
                 } else {
-                    navbar.classList.remove("shadow-md", "backdrop-blur-xl");
+                    navbar?.classList.remove("shadow-md", "backdrop-blur-xl");
                 }
-            });
+            }
+            window.addEventListener("scroll", onScroll, { signal });
+            onScroll();
+
+            document.addEventListener("astro:before-swap", instantClose, { signal });
         }
-    });
+
+        document.addEventListener("astro:page-load", setupNavbar);
+    })();
 </script>
+
+
 
 <style>
     #mobileMenuBtn .line:nth-child(1) {
