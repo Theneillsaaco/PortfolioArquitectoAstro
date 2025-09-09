@@ -11,10 +11,10 @@ const categories = Array.from(
 ).sort();
 ---
 
-<div class="bg-cream-50">
+<div class="bg-cream-50 pt-20">
     <div class="container mx-auto px-6">
-        <div class="text-center mb-20">
-            <div class="inline-flex items-center gap-2 bg-primary-500/20 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide mb-6">
+        <div class="text-center mb-16">
+            <div class="px-4 py-2 inline-flex items-center gap-2 bg-primary-500/15 text-primary-700 rounded-full text-sm font-medium uppercase tracking-wide mb-6">
                 <Icon class="w-4 h-4" name="portfolio/Proyecto" />
                 <span>Portfolio</span>
             </div>
@@ -22,16 +22,23 @@ const categories = Array.from(
         </div>
 
         <!-- Filter Buttons -->
-        <div id="portfolio-filter" class="portfolio-filter flex justify-center gap-4 flex-wrap mb-16 select-none">
+        <div id="portfolio-filter" class="relative flex justify-center gap-2 flex-wrap mb-16 select-none bg-cream-100 px-2 py-2 rounded-2xl shadow-sm">
+            <span
+                id="filter-pill"
+                class="absolute top-0 left-0  rounded-xl bg-primary-500 shadow-md transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                style="width: 0; height: 0; transform: translate(0,0);"
+            />
+
             <button
-                class="filter-btn bg-white border-2 border-cream-300 text-cream-700 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-primary-500 hover:border-primary-500 hover:text-white hover:-translate-y-1 hover:shadow-md active"
+                class="filter-btn relative z-10 px-5 py-2 rounded-xl font-medium text-sm transition-colors duration-200 text-secondary-700 hover:bg-secondary-100/60 active:scale-95 focus:outline-none focus:ring-primary-400"
                 data-filter="all"
             >
                 Todos
             </button>
+
             {categories.map(cat => (
                 <button
-                    class="filter-btn bg-white border-2 border-cream-300 text-cream-700 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-primary-500 hover:border-primary-500 hover:text-white hover:-translate-y-1 hover:shadow-md"
+                    class="filter-btn relative z-10 px-5 py-2 rounded-xl font-medium text-sm transition-colors duration-200 text-secondary-700 hover:bg-secondary-100/60 active:scale-95 focus:outline-none focus:ring-primary-400"
                     data-filter={cat}
                 >
                     {cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -42,19 +49,19 @@ const categories = Array.from(
         <!-- Portfolio Grid -->
         <div
             id="portfolio-grid"
-            class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
             {projects.map((proj, i) => (
                 <a
                     href={`/PortfolioArquitectoAstro/project/${proj.slug}`}
-                    class="portfolio-card bg-white rounded-2xl overflow-hidden shadow-lg border border-cream-200 hover:shadow-2xl hover:-translate-y-4 transition-transform duration-500 group opacity-100 scale-100 block focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    class="portfolio-card bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 group opacity-100 scale-100 block border border-cream-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500"
                     data-category={proj.data.type.toLowerCase()}
                     data-index={i}
                     role="article"
                     aria-label={`Proyecto: ${proj.data.title}, Categoria: ${proj.data.type}`}
                     tabindex="0"
                 >
-                    <div class="card-image-container relative h-64 overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
                         <img
                             transition:name={`project-image-${proj.slug}`}
                             src={proj.data.img.cover}
@@ -62,44 +69,53 @@ const categories = Array.from(
                             loading="lazy"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         />
-                        <div class="card-overlay absolute inset-0 bg-gradient-to-br from-primary-500/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary-600/70 to-primary-400/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <span
-                                class="bg-white text-cream-800 px-6 py-3 rounded-full font-semibold hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex items-center gap-2"
+                                class="bg-white text-primary-800 px-5 py-2 rounded-xl font-medium shadow-md flex items-center gap-2 text-sm"
                                 aria-label={`Ver detalles del proyecto ${proj.data.title}`}
                             >
-                                <Icon class="w-5 h-5" name="portfolio/Eyes" />
+                                <Icon class="w-4 h-4" name="portfolio/Eyes" />
                                 Ver Proyecto
                             </span>
                         </div>
                     </div>
 
                     <!-- Contenido -->
-                    <div class="card-content p-6">
-                        <div class="card-meta flex justify-between items-center mb-4">
-                            <span class="category bg-primary-500 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide"  transition:name={`project-type-${proj.slug}`}>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide"  transition:name={`project-type-${proj.slug}`}>
                                 {proj.data.type}
                             </span>
-                            <span class="year text-cream-600 text-sm font-medium">
+                            <span class="year text-cream-600 text-sm">
                                 {proj.data.date}
                             </span>
                         </div>
                         <h4 
-                            class="project-title text-xl font-bold text-cream-900 mb-3 leading-tight"
+                            class="text-lg font-semibold text-cream-900 mb-2 leading-snug"
                             transition:name={`project-title-${proj.slug}`}
                         >
                             {proj.data.title}
                         </h4>
-                        <p class="project-description text-cream-700 mb-4 leading-relaxed">
+                        <p class="text-cream-700 text-sm leading-relaxed mb-3">
                             {proj.data.description}
                         </p>
-                        <div class="project-tags flex gap-2 flex-wrap">
-                            <span class="tag bg-cream-100 text-cream-700 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="bg-cream-200 text-cream-800 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">
                                 {proj.data.location}
                             </span>
-                            <span class="tag bg-cream-100 text-cream-700 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">
+                            <span class="bg-cream-200 text-cream-800 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">
                                 {proj.data.meters}
                             </span>
                         </div>
+                        <div class="flex py-4">
+                            <Button 
+                                text="Ver Proyecto"
+                                variant="tonal"
+                                iconName="portfolio/Arrow"
+                                iconAfterText={true}
+                                class="mt-auto"
+                            />
+                        </div>  
                     </div>
                 </a>
             ))}
@@ -123,7 +139,21 @@ const categories = Array.from(
     document.addEventListener("astro:page-load", () => {
         const filterButtons = document.querySelectorAll(".filter-btn");
         const portfolioCards = document.querySelectorAll(".portfolio-card");
+        const pill = document.getElementById("filter-pill")
         const MAX_VISIBLE = 6;
+
+        function movePill(target) {
+            const rect = target.getBoundingClientRect();
+            const parentRect = target.parentElement.getBoundingClientRect();
+
+            pill.style.width = `${rect.width}px`;
+            pill.style.height = `${rect.height}px`;
+
+            const x = rect.left - parentRect.left;
+            const y = rect.top - parentRect.top;
+
+            pill.style.transform = `translate(${x}px, ${y}px)`;
+        }
 
         function showFiltered(filter) {
             filter = (filter || "all").toLowerCase();
@@ -131,7 +161,6 @@ const categories = Array.from(
 
             portfolioCards.forEach((card) => {
                 const category = (card.getAttribute("data-category") || "").toLowerCase();
-
                 const isMatch = filter === "all" || category === filter;
 
                 if (isMatch && show < MAX_VISIBLE) {
@@ -145,30 +174,26 @@ const categories = Array.from(
                 } else {
                     card.classList.remove("opacity-100", "scale-100");
                     card.classList.add("opacity-0", "scale-95");
-                    card.style.display = "none"; // lo quita del grid inmediatamente
+                    card.style.display = "none";
                 }
             });
         }
 
         showFiltered("all");
+        movePill(filterButtons[0]);
 
         filterButtons.forEach(btn => {
             btn.addEventListener("click", () => {
-                filterButtons.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
+                movePill(btn);
 
                 const filter = (btn.getAttribute("data-filter") || "all").toLowerCase();
                 showFiltered(filter);
             });
         });
 
-        filterButtons.forEach(btn => {
-            btn.addEventListener("keydown", (e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    btn.click();
-                }
-            });
-        });
+        window.addEventListener("resize", () => {
+            const activeBtn = document.querySelector(".filter-btn-active") || filterButtons[0];
+            movePill(activeBtn);
+        })
     });
 </script>
