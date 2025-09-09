@@ -125,6 +125,7 @@ const loadingAriaLabel = isLoading
 // Determinar el onclick
 const onClickHandler = onClick || (scrollTarget ? `scrollToSection('${scrollTarget}')` : undefined);
 
+
 // Determinar si usar enlace o botón
 const useButton = !link || scrollTarget || onClick;
 ---
@@ -332,3 +333,12 @@ const useButton = !link || scrollTarget || onClick;
         )}
     </>
 )}
+
+<script is:inline>
+    window.scrollToSection = (id) => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+</script>
