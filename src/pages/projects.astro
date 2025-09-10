@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import Heading from '../components/ui/Heading.astro';
+import Button from '../components/ui/Button.astro';
 
 const projects = await getCollection("projects");
 
@@ -84,6 +85,16 @@ const filteredProjects = projects
                                     </span>
                                 ))}
                             </div>
+
+                            <div class="flex py-4">
+                                <Button 
+                                    text="Ver Proyecto"
+                                    variant="tonal"
+                                    iconName="portfolio/Arrow"
+                                    iconAfterText={true}
+                                    class="mt-auto"
+                                />
+                            </div>  
                         </div>
                     </a>
                 ))}
