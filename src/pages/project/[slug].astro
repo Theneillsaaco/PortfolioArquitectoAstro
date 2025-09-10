@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import Button from "../../components/ui/Button.astro";
+import Heading from "../../components/ui/Heading.astro";
 
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
@@ -32,12 +33,7 @@ const { Content } = await project.render();
                 <span class="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium bg-primary-200/70 text-primary-700 backdrop-blur-sm mb-4" transition:name={`project-type-${project.slug}`}>
                     {project.data.type}
                 </span>
-                <h1 
-                    class="text-4xl lg:text-6xl font-bold tracking-tight mb-4"
-                    transition:name={`project-title-${project.slug}`}
-                >
-                    {project.data.title}
-                </h1>
+                <Heading text={project.data.title} level={1} transition:name={`project-title-${project.slug}`} />
                 <p class="text-lg lg:text-xl text-cream-800 max-w-2xl">
                     {project.data.description}
                 </p>

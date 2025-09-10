@@ -9,7 +9,7 @@ tags: ["Centro Cultural", "Arquitectura"]
 img:
   cover: "../../../PortfolioArquitectoAstro/Projects/project-img-3.webp"
   secondary: ""
-  Others: []  
+  others: []  
 ---
 
 Aquí puedes escribir contenido más largo del proyecto, como detalles de construcción, historia o características.
