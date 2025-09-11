@@ -4,7 +4,6 @@ description: Arquitectura corporativa con identidad caribeña
 date: 2022
 type: Comercial
 location: Santo Domingo
-meters: 1200m²
 tags: ["Comercial", "Oficina", "Arquitectura"]
 img:
   cover: "../../../PortfolioArquitectoAstro/Projects/project-img-1.webp"

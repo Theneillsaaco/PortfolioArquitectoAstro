@@ -11,12 +11,12 @@ const categories = Array.from(
 ).sort();
 ---
 
-<div class="bg-cream-50 pt-20">
+<div class="bg-cream-50 pt-20 pb-10">
     <div class="container mx-auto px-6">
         <div class="text-center mb-16">
             <div class="px-4 py-2 inline-flex items-center gap-2 bg-primary-500/15 text-primary-700 rounded-full text-sm font-medium uppercase tracking-wide mb-6">
                 <Icon class="w-4 h-4" name="portfolio/Proyecto" />
-                <span>Portfolio</span>
+                <span>Portafolio</span>
             </div>
             <Heading text="Proyectos que definen" textGradient="mi visión" level={2} />
         </div>
@@ -102,9 +102,6 @@ const categories = Array.from(
                         <div class="flex gap-2 flex-wrap">
                             <span class="bg-cream-200 text-cream-800 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">
                                 {proj.data.location}
-                            </span>
-                            <span class="bg-cream-200 text-cream-800 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">
-                                {proj.data.meters}
                             </span>
                         </div>
                         <div class="flex py-4">
