@@ -4,7 +4,6 @@ description: Espacio inclusivo de atención integral
 date: 2024
 type: Educativo
 location: Santiago, RD
-meters: 1800m²
 tags: ["Educación", "Inclusión", "Arquitectura", "Diseño"]
 img:
   cover: "../../../PortfolioArquitectoAstro/Projects/CentroEducativo/Cover.webp"

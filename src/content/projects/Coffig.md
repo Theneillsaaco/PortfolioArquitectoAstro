@@ -4,7 +4,6 @@ description: Arquitectura comercial flexible y sostenible
 date: 2024
 type: Comercial
 location: Santiago, RD
-meters: 250m²
 tags: ["Cafetería", "Arquitectura", "Comercial", "Diseño modular"]
 img:
   cover: "../../../PortfolioArquitectoAstro/Projects/Coffig/Cover.webp"
