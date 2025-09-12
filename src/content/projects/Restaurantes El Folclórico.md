@@ -3,7 +3,7 @@ title: Restaurantes El Folclórico
 description: Fusión de modernidad y tradición en un espacio gastronómico
 date: 2025
 type: Comercial
-location: Punta Caba
+location: Punta Cana
 meters: 900m²
 tags: ["Comercial", "Restaurante", "Arquitectura", "Diseño tropical"]
 img:
