@@ -53,11 +53,6 @@ export default {
                     900: '#22251d',
                 },
             },
-            fontFamily: {
-                serif: ['Libre Caslon Text', 'serif'],
-                sans: ['Jost', 'system-ui', 'sans-serif'],
-                mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-            },
             animation: {
                 'float': 'float 6s ease-in-out infinite'
             },
