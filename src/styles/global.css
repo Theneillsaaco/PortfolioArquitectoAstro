@@ -1,6 +1,70 @@
 @import "tailwindcss";
 @import "tailwindcss-animated";
-@config "../../tailwind.config.mjs";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* ── Colors: primary (oliva suave) ── */
+  --color-primary-50:  #f4f6f2;
+  --color-primary-100: #e6eadf;
+  --color-primary-200: #ccd6bd;
+  --color-primary-300: #b3c39c;
+  --color-primary-400: #99af7a;
+  --color-primary-500: #7f9c59;
+  --color-primary-600: #667a47;
+  --color-primary-700: #4d5c35;
+  --color-primary-800: #333d23;
+  --color-primary-900: #1a1f12;
+
+  /* ── Colors: secondary (tono madera) ── */
+  --color-secondary-50:  #f9f6f2;
+  --color-secondary-100: #efe8dc;
+  --color-secondary-200: #d7c9b1;
+  --color-secondary-300: #bba88a;
+  --color-secondary-400: #9f8763;
+  --color-secondary-500: #83663c;
+  --color-secondary-600: #664e30;
+  --color-secondary-700: #4d3b24;
+  --color-secondary-800: #332819;
+  --color-secondary-900: #1a140d;
+
+  /* ── Colors: accent (piedra claro) ── */
+  --color-accent-50:  #fdfbf7;
+  --color-accent-100: #f6f0e6;
+  --color-accent-200: #eadac4;
+  --color-accent-300: #ddc3a1;
+  --color-accent-400: #d0ac7e;
+  --color-accent-500: #c3955b;
+  --color-accent-600: #9c7749;
+  --color-accent-700: #755937;
+  --color-accent-800: #4e3b25;
+  --color-accent-900: #271d12;
+
+  /* ── Colors: cream (blanco crema) ── */
+  --color-cream-50:  #ffffff;
+  --color-cream-100: #faf8f5;
+  --color-cream-200: #f2eee7;
+  --color-cream-300: #e6ddd0;
+  --color-cream-400: #d8cbb8;
+  --color-cream-500: #cabaa1;
+  --color-cream-600: #a0957f;
+  --color-cream-700: #766f5e;
+  --color-cream-800: #4c4a3e;
+  --color-cream-900: #22251d;
+
+  /* ── Animations ── */
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes bounceSoft {
+    0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+    40%, 43% { transform: translateY(-15px); }
+    70% { transform: translateY(-5px); }
+  }
+}
 
 /* Custom CSS Variables */
 :root {
