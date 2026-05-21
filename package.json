@@ -12,8 +12,8 @@
     "@astrojs/check": "0.9.9",
     "@iconify-json/mdi": "1.2.3",
     "@tailwindcss/vite": "4.3.0",
+    "@twodft/astro-icon": "^1.2.4",
     "astro": "6.3.7",
-    "astro-icon": "1.1.5",
     "tailwindcss": "4.3.0",
     "typescript": "5.9.2"
   },
