@@ -9,10 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "0.9.4",
+    "@astrojs/check": "0.9.9",
     "@iconify-json/mdi": "1.2.3",
     "@tailwindcss/vite": "4.1.12",
-    "astro": "5.14.3",
+    "astro": "6.3.7",
     "astro-icon": "1.1.5",
     "tailwindcss": "4.1.12",
     "tailwindcss-animated": "2.0.0",
