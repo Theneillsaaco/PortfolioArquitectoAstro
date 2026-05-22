@@ -8,45 +8,52 @@ const EXPERIENCE = [
         date: "2020 - 2024",
         title: "Arquitectura",
         subtitle: "Pontificia Universidad Católica Madre y Maestra (PUCMM)",
-        description:
-            "Formación académica en diseño arquitectónico"
+        description: "Formación académica en diseño arquitectónico",
+        badge: "Grado",
+        current: false,
     },
     {
         date: "2023 - 2024",
         title: "Diseñador Junior",
         subtitle: "Creative Desing",
-        description:
-            "Apoyo en planos arquitectónicos e interiores, interpretación de conceptos con clientes y documentación técnica de proyectos."
+        description: "Apoyo en planos arquitectónicos e interiores, interpretación de conceptos con clientes y documentación técnica de proyectos.",
+        badge: "Junior",
+        current: false,
     },
     {
         date: "2024 - Presente",
         title: "Encargada del área de Diseño",
         subtitle: "Nogal Creations",
-        description:
-            "Desarrollo de propuestas arquitectónicas, supervisión de mobiliario personalizado y gestión de proyectos desde la idea hasta la ejecución."
+        description: "Desarrollo de propuestas arquitectónicas, supervisión de mobiliario personalizado y gestión de proyectos desde la idea hasta la ejecución.",
+        badge: "Actual",
+        current: false, 
     }
 ];
 ---
 
-<section id="experience" class="w-full mx-auto max-w-4xl pt-6 bg-cream-50">
-    <div class="flex flex-col gap-12">
-        <div class="flex flex-col gap-4 items-center text-center">
-            <div class="inline-flex items-center gap-2 bg-primary-500/15 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide text-primary-700">
-                <Icon class="w-4 h-4 text-primary-600" name="portfolio/Clock" />
-                <span>Experincia</span>
+<section id="experience" class="w-full max-w-4xl mx-auto pt-6 px-4 bg-cream-50">
+    <div class="flex flex-col gap-10">
+        <div class="flex flex-col items-center text-center gap-3">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 text-primary-700 text-xs font-medium rounded-3xl tracking-widest uppercase">
+                <Icon class="w-4 h-4" name="material-symbols:nest-clock-farsight-analog-outline-rounded" aria-hidden="true" />
+                Experiencia
             </div>
 
             <Heading text="Work" textGradient="Experience" level={2} />
 
-            <p class="text-secondary-600 max-w-2xl">
+            <p class="text-sm text-secondary-600 max-w-md leading-relaxed">
                 Un recorrido de hitos profesionales que muestran mi crecimiento y pasión por la arquitectura.
             </p>
         </div>
 
-        <ol class="relative mt-16 space-y-4 px-4" aria-label="Professional experience">
-            {EXPERIENCE.map(experience => (
+        <!-- Timeline -->
+        <ol class="flex flex-col" aria-label="Professional experience">
+            {EXPERIENCE.map((item, i) => (
                 <li>
-                    <ExperienceItem {...experience} />
+                    <ExperienceItem 
+                        {...item}
+                        isLast={i === EXPERIENCE.length - 1}
+                    />
                 </li>
             ))}
         </ol>
