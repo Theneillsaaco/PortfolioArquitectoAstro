@@ -11,16 +11,14 @@ const stats = [
 ];
 ---
 
-<section class="relative overflow-hidden bg-cream-50 min-h-screen flex items-center border-b border-cream-200">
-    <div class="container mx-auto px-6 py-16 lg:py-0">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-screen items-center">
+<section class="relative overflow-hidden bg-cream-50 min-h-screen flex items-center">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 min-h-screen items-center py-16">
             <!-- Izquierda: contenido -->
-            <div class="flex flex-col justify-center py-16 lg:py-24 pr-0 lg:pr-12">
+            <div class="flex flex-col justify-center order-2 lg:order-1 px-6 sm:px-10 lg:px-16 py-3">
 
                 <!-- Eyebrow chip -->
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full
-                    bg-primary-100 text-primary-700 text-xs font-medium
-                    tracking-widest uppercase w-fit mb-6">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-100 text-primary-700 text-xs font-medium tracking-widest uppercase w-fit mb-5">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
@@ -32,18 +30,18 @@ const stats = [
                 <Heading level={1} text="Andry Santana" className="mb-3" />
 
                 <!-- Roles -->
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="text-sm font-medium tracking-widest uppercase text-primary-600">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="text-xs font-medium tracking-widest uppercase text-primary-600">
                         Arquitecta
                     </span>
-                    <div class="w-1 h-1 rounded-full bg-accent-500" aria-hidden="true" />
-                    <span class="text-sm font-medium tracking-widest uppercase text-primary-600">
+                    <div class="w-1.5 h-1.5 rounded-full bg-accent-500" aria-hidden="true" />
+                    <span class="text-xs font-medium tracking-widest uppercase text-primary-600">
                         Diseñadora
                     </span>
                 </div>
 
                 <!-- Bio -->
-                <p class="text-base text-secondary-700 leading-relaxed max-w-md mb-8">
+                <p class="text-base text-secondary-700 leading-relaxed max-w-sm mb-8">
                     Especializada en diseño arquitectónico, interiorismo y mobiliario personalizado.
                     Combino creatividad y técnica para transformar conceptos en espacios funcionales.
                 </p>
@@ -69,12 +67,14 @@ const stats = [
                     />
                 </div>
             </div>
-
+            
             <!-- Derecha: retrato -->
-            <HeroPortrait
-                src="/PortfolioArquitectoAstro/Images/Andris.webp"
-                alt="Andry Santana, Arquitecta"
-            />
+            <div class="order-1 lg:order-2">
+                <HeroPortrait
+                    src="/PortfolioArquitectoAstro/Images/Andris.webp"
+                    alt="Andry Santana, Arquitecta"
+                />
+            </div>
         </div>
     </div>
   </div>
