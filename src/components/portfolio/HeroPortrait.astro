@@ -1,4 +1,6 @@
 ---
+import { Icon } from "@twodft/astro-icon/components";
+
 interface Props {
   src: string;
   alt: string;
@@ -31,12 +33,7 @@ const {
     <!-- Pill: ubicación -->
     <div class="absolute top-4 left-4 z-20 flex items-center gap-2.5 bg-cream-50/90 backdrop-blur-sm border border-cream-200 rounded-2xl px-3 py-2">
         <div class="w-7 h-7 rounded-lg bg-accent-100 flex items-center justify-center text-accent-700 shrink-0">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
+            <Icon name="mdi:location-outline" />
         </div>
         <div>
             <p class="text-xs font-medium text-cream-900 leading-none mb-0.5">
@@ -51,10 +48,7 @@ const {
     <!-- Pill: premios — oculta en mobile chico para no saturar -->
     <div class="hidden sm:flex absolute bottom-4 left-1/2 -translate-x-1/2 z-20 items-center gap-2.5 bg-cream-50/90 backdrop-blur-sm border border-cream-200 rounded-2xl px-3 py-2 flex-nowrap">
         <div class="w-7 h-7 rounded-lg bg-primary-100 flex items-center justify-center text-primary-700 shrink-0">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-            </svg>
+            <Icon name="mdi:check-decagram-outline" />
         </div>
         <div>
             <p class="text-xs font-medium text-cream-900 leading-none mb-0.5">
