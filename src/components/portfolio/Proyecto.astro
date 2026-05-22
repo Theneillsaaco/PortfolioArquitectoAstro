@@ -3,6 +3,8 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import { Icon } from "@twodft/astro-icon/components";
 import Heading from "../ui/Heading.astro";
 import Button from "../ui/Button.astro";
+import ProjectCard from "./ProjectCard.astro";
+
 
 const projects: CollectionEntry<"projects">[] = await getCollection("projects");
 
@@ -13,33 +15,35 @@ const categories = Array.from(
 
 <section id="proyectos" class="bg-cream-50 pt-20 pb-10">
     <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-            <div class="px-4 py-2 inline-flex items-center gap-2 bg-primary-500/15 text-primary-700 rounded-full text-sm font-medium uppercase tracking-wide mb-6">
-                <Icon class="w-4 h-4" name="portfolio/Proyecto" />
-                <span>Portafolio</span>
+        <!-- Header -->
+        <div class="flex flex-col items-center gap-3 mb-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-100 text-primary-700 text-xs font-medium tracking-widest uppercase">
+                <Icon class="w-4 h-4" name="material-symbols:grid-view-rounded" aria-hidden="true" />
+                Portafolio
             </div>
             <Heading text="Proyectos que definen" textGradient="mi visión" level={2} />
         </div>
 
         <!-- Filter Buttons -->
-        <div id="portfolio-filter" class="relative flex justify-center gap-2 flex-wrap mb-16 select-none bg-cream-100 px-2 py-2 rounded-2xl shadow-sm">
-            <span
-                id="filter-pill"
-                class="absolute top-0 left-0  rounded-xl bg-primary-500 shadow-md transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                style="width: 0; height: 0; transform: translate(0,0);"
-            />
-
+        <div 
+            id="portfolio-filter"
+            class="flex justify-center gap-2 flex-wrap mb-10"
+            role="group"
+            aria-label="Filtrar proyectos"
+        >
             <button
-                class="filter-btn relative z-10 px-5 py-2 rounded-xl font-medium text-sm transition-colors duration-200 text-secondary-700 hover:bg-secondary-100/60 active:scale-95 focus:outline-none focus:ring-primary-400"
+                class="filter-btn px-5 py-2 rounded-full text-sm font-medium border border-primary-500 bg-primary-500 text-white transition-colors duration-200 focus:outline-none focus:ring-primary-500 focus:ring-offset-2"
                 data-filter="all"
+                aria-pressed="true"
             >
                 Todos
             </button>
 
             {categories.map(cat => (
                 <button
-                    class="filter-btn relative z-10 px-5 py-2 rounded-xl font-medium text-sm transition-colors duration-200 text-secondary-700 hover:bg-secondary-100/60 active:scale-95 focus:outline-none focus:ring-primary-400"
+                    class="filter-btn px-5 py-2 rounded-full text-sm font-medium border border-cream-300 bg-cream-50 text-cream-800 hover:bg-primary-100 hover:border-primary-300 hover:text-primary-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
                     data-filter={cat}
+                    aria-pressed="false"
                 >
                     {cat.charAt(0).toUpperCase() + cat.slice(1)}
                 </button>
@@ -49,82 +53,19 @@ const categories = Array.from(
         <!-- Portfolio Grid -->
         <div
             id="portfolio-grid"
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
         >
             {projects.map((proj, i) => (
-                <a
-                    href={`/PortfolioArquitectoAstro/project/${proj.id}`}
-                    class="portfolio-card bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 group opacity-100 scale-100 block border border-cream-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500"
-                    data-category={proj.data.type.toLowerCase()}
-                    data-index={i}
-                    role="article"
-                    aria-label={`Proyecto: ${proj.data.title}, Categoria: ${proj.data.type}`}
-                    tabindex="0"
-                >
-                    <div class="relative h-64 overflow-hidden">
-                        <img
-                            transition:name={`project-image-${proj.id}`}
-                            src={proj.data.img.cover}
-                            alt={proj.data.title}
-                            loading="lazy"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-br from-primary-600/70 to-primary-400/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span
-                                class="bg-white text-primary-800 px-5 py-2 rounded-xl font-medium shadow-md flex items-center gap-2 text-sm"
-                                aria-label={`Ver detalles del proyecto ${proj.data.title}`}
-                            >
-                                <Icon class="w-4 h-4" name="portfolio/Eyes" />
-                                Ver Proyecto
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Contenido -->
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide"  transition:name={`project-type-${proj.id}`}>
-                                {proj.data.type}
-                            </span>
-                            <span class="year text-cream-600 text-sm">
-                                {proj.data.date}
-                            </span>
-                        </div>
-                        <h4 
-                            class="text-lg font-semibold text-cream-900 mb-2 leading-snug"
-                            transition:name={`project-title-${proj.id}`}
-                        >
-                            {proj.data.title}
-                        </h4>
-                        <p class="text-cream-700 text-sm leading-relaxed mb-3">
-                            {proj.data.description}
-                        </p>
-                        <div class="flex gap-2 flex-wrap">
-                            <span class="bg-cream-200 text-cream-800 px-3 py-1 rounded-full text-xs font-medium border border-cream-200">
-                                {proj.data.location}
-                            </span>
-                        </div>
-                        <div class="flex py-4">
-                            <Button 
-                                text="Ver Proyecto"
-                                variant="tonal"
-                                iconName="portfolio/Arrow"
-                                iconAfterText={true}
-                                class="mt-auto"
-                                data-astro-prefetch
-                            />
-                        </div>  
-                    </div>
-                </a>
+                <ProjectCard project={proj} index={i} />
             ))}
         </div>
 
         <!-- View More Button -->
-        <div class="flex justify-center mt-16">
+        <div class="flex justify-center mt-12">
             <Button
                 text="Ver Portafolio Completo"
                 variant="outline"
-                iconName="portfolio/Arrow"
+                iconName="material-symbols:keyboard-arrow-right"
                 animatedBorder={true}
                 iconAfterText={true}
                 link="/PortfolioArquitectoAstro/projects"
@@ -134,65 +75,48 @@ const categories = Array.from(
     </div>
 </section>
 
-<script type="module" is:inline>
-    document.addEventListener("astro:page-load", () => {
-        const filterButtons = document.querySelectorAll(".filter-btn");
-        const portfolioCards = document.querySelectorAll(".portfolio-card");
-        const pill = document.getElementById("filter-pill")
-        const MAX_VISIBLE = 6;
+<script>
+  const MAX_VISIBLE = 6;
 
-        function movePill(target) {
-            const rect = target.getBoundingClientRect();
-            const parentRect = target.parentElement.getBoundingClientRect();
+  document.addEventListener("astro:page-load", () => {
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const cards      = document.querySelectorAll<HTMLElement>(".portfolio-card");
 
-            pill.style.width = `${rect.width}px`;
-            pill.style.height = `${rect.height}px`;
+    const ACTIVE   = ["bg-primary-500", "text-white",      "border-primary-500"];
+    const INACTIVE = ["bg-cream-50",    "text-cream-800",  "border-cream-300",
+                      "hover:bg-primary-100", "hover:border-primary-300", "hover:text-primary-700"];
 
-            const x = rect.left - parentRect.left;
-            const y = rect.top - parentRect.top;
+    function applyFilter(filter: string) {
+      let shown = 0;
+      cards.forEach(card => {
+        const cat     = (card.dataset.category ?? "").toLowerCase();
+        const visible = (filter === "all" || cat === filter) && shown < MAX_VISIBLE;
+        card.style.display = visible ? "" : "none";
+        if (visible) shown++;
+      });
+    }
 
-            pill.style.transform = `translate(${x}px, ${y}px)`;
+    function setActive(target: HTMLButtonElement) {
+      filterBtns.forEach(btn => {
+        const isTarget = btn === target;
+        btn.setAttribute("aria-pressed", String(isTarget));
+        if (isTarget) {
+          btn.classList.remove(...INACTIVE);
+          btn.classList.add(...ACTIVE);
+        } else {
+          btn.classList.remove(...ACTIVE);
+          btn.classList.add(...INACTIVE);
         }
+      });
+    }
 
-        function showFiltered(filter) {
-            filter = (filter || "all").toLowerCase();
-            let show = 0;
+    applyFilter("all");
 
-            portfolioCards.forEach((card) => {
-                const category = (card.getAttribute("data-category") || "").toLowerCase();
-                const isMatch = filter === "all" || category === filter;
-
-                if (isMatch && show < MAX_VISIBLE) {
-                    card.style.display = "block";
-
-                    setTimeout(() => {
-                        card.classList.remove("opacity-0", "scale-95");
-                        card.classList.add("opacity-100", "scale-100");
-                    }, 20);
-                    show++;
-                } else {
-                    card.classList.remove("opacity-100", "scale-100");
-                    card.classList.add("opacity-0", "scale-95");
-                    card.style.display = "none";
-                }
-            });
-        }
-
-        showFiltered("all");
-        movePill(filterButtons[0]);
-
-        filterButtons.forEach(btn => {
-            btn.addEventListener("click", () => {
-                movePill(btn);
-
-                const filter = (btn.getAttribute("data-filter") || "all").toLowerCase();
-                showFiltered(filter);
-            });
-        });
-
-        window.addEventListener("resize", () => {
-            const activeBtn = document.querySelector(".filter-btn-active") || filterButtons[0];
-            movePill(activeBtn);
-        })
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        setActive(btn);
+        applyFilter((btn.dataset.filter ?? "all").toLowerCase());
+      });
     });
+  });
 </script>
