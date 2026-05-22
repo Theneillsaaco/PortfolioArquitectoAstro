@@ -1,0 +1,55 @@
+---
+interface Props {
+	stats: { value: number; suffix: string; label: string}[];
+}
+
+const { stats } = Astro.props;
+---
+
+<div id="stats-container" class="grid grid-cols-3 divide-x divide-cream-300 bg-cream-100 border border-cream-300 rounded-2xl overflow-hidden transition-all duration-500">
+    {stats.map(s => (
+        <div class="flex flex-col items-center py-4 px-2">
+            <span
+                class="text-2xl font-medium text-cream-900 tabular-nums"
+                data-target={s.value}
+                data-suffix={s.suffix}
+            >
+                0{s.suffix}
+            </span>
+            <span class="text-xs text-cream-600 mt-1 tracking-wide">
+                {s.label}
+            </span>
+        </div>
+    ))}
+</div>
+
+<script>
+    function runCounters() {
+        const container = document.getElementById("stats-container");
+        if (!container) 
+            return;
+
+        const counters = container.querySelectorAll<HTMLElement>("[data-target]");
+
+        counters.forEach(el => {
+            const target = Number(el.dataset.target ?? 0);
+            const suffix = el.dataset.suffix ?? "";
+
+            let start: number | null = null;
+
+            const tick = (ts: number) => {
+                if (!start) 
+                    start = ts;
+                    
+                const p = Math.min((ts - start) / 1400, 1);
+                el.textContent = Math.floor(p * target) + suffix;
+
+                if (p < 1) 
+                    requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+        });
+    }
+    
+    document.addEventListener("astro:page-load", runCounters);
+</script>

@@ -1,146 +1,81 @@
 ﻿---
 import Button from "../ui/Button.astro";
 import Heading from "../ui/Heading.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
-
-const projects: CollectionEntry<"projects">[] = await getCollection("projects");
-const selectedProjects = projects
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 4);
+import HeroPortrait from "./HeroPortrait.astro";
+import HeroStats from "./HeroStats.astro";
 
 const stats = [
-    { value: 45, suffix: "+", label: "Proyectos" },
-    { value: 3, suffix: "+", label: "Años" },
-    { value: 15, suffix: "", label: "Premios" }
+  { value: 45, suffix: "+", label: "Proyectos" },
+  { value: 3,  suffix: "+", label: "Años" },
+  { value: 15, suffix: "",  label: "Premios" },
 ];
 ---
 
-<div class="relative flex items-center overflow-hidden bg-cream-50">
-    <div class="absolute inset-0 z-10" />
+<section class="relative overflow-hidden bg-cream-50 min-h-screen flex items-center border-b border-cream-200">
+    <div class="container mx-auto px-6 py-16 lg:py-0">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-screen items-center">
+            <!-- Izquierda: contenido -->
+            <div class="flex flex-col justify-center py-16 lg:py-24 pr-0 lg:pr-12">
 
-    <!-- Decorative Elements -->
-    <div class="decorative-elements absolute inset-0 z-0">
-        <!-- Top row -->
-        <div class="element-1 absolute -top-5 -right-5 w-24 h-24 bg-gradient-to-br from-primary-500 to-primary-400 rounded-full opacity-15 animate-float"></div>
-        <div class="element-2 absolute top-10 left-1/4 w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-300 rounded-full opacity-10 animate-float animation-delay-1000"></div>
-        <div class="element-3 absolute top-20 right-1/4 w-20 h-20 bg-gradient-to-br from-secondary-500 to-secondary-400 rounded-xl opacity-15 animate-float animation-delay-1500"></div>
-        <div class="element-4 absolute top-32 left-10 w-12 h-12 bg-gradient-to-br from-accent-400 to-accent-300 rounded-full opacity-10 animate-float animation-delay-2500"></div>
-
-        <!-- Middle row -->
-        <div class="element-5 absolute top-1/3 right-1/3 w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-400 rounded-xl opacity-15 animate-float animation-delay-800"></div>
-        <div class="element-6 absolute top-1/2 -right-10 w-16 h-16 bg-secondary-500 rounded-full opacity-10 animate-float animation-delay-3000"></div>
-        <div class="element-7 absolute top-1/2 left-1/4 w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-400 rounded-full opacity-10 animate-float animation-delay-2200"></div>
-        <div class="element-8 absolute top-2/3 right-1/4 w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-300 rounded-full opacity-10 animate-float animation-delay-1200"></div>
-
-        <!-- Bottom row -->
-        <div class="element-9 absolute -bottom-8 -left-8 w-20 h-20 bg-gradient-to-br from-accent-500 to-accent-400 rounded-xl opacity-15 animate-float animation-delay-2000 reverse"></div>
-        <div class="element-10 absolute bottom-20 right-20 w-16 h-16 bg-gradient-to-br from-secondary-400 to-secondary-300 rounded-full opacity-12 animate-float animation-delay-1800"></div>
-        <div class="element-11 absolute bottom-40 left-1/3 w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-400 rounded-xl opacity-10 animate-float animation-delay-2700"></div>
-        <div class="element-12 absolute bottom-10 right-1/3 w-12 h-12 bg-gradient-to-br from-accent-400 to-accent-300 rounded-full opacity-15 animate-float animation-delay-1600"></div>
-    </div>
-
-    <div class="container mx-auto px-6 relative z-10 h-full flex items-center">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
-            <!-- Left Content -->
-            <div class="text-primary-900 relative">
-                <div class="flex flex-row items-center gap-6">
-                    <div class="flex-1">
-                        <Heading text="Andry Santana" level={1} />
-                    </div>
-
-                    <!-- Main Portrait -->
-                    <div class="main-portrait w-32 h-40 sm:w-40 sm:h-48 md:w-60 md:h-72 rounded-3xl overflow-hidden shadow-2xl flex-shrink-0">
-                        <img
-                            src="../../../PortfolioArquitectoAstro/Images/Andris.webp"
-                            alt="Andrys Santana"
-                            class="w-full h-full object-cover object-top"
-                        />
-                    </div>
+                <!-- Eyebrow chip -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full
+                    bg-primary-100 text-primary-700 text-xs font-medium
+                    tracking-widest uppercase w-fit mb-6">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                    Portafolio profesional
                 </div>
 
-                <div class="flex items-center gap-4 mb-8 animate-slide-in-left animation-delay-400">
-                    <span class="text-lg uppercase tracking-wide">Arquitecto</span>
-                    <div class="w-1 h-1 bg-accent-500 rounded-full" />
-                    <span class="text-lg uppercase tracking-wide">Diseñador</span>
+                <!-- Nombre -->
+                <Heading level={1} text="Andry Santana" className="mb-3" />
+
+                <!-- Roles -->
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-sm font-medium tracking-widest uppercase text-primary-600">
+                        Arquitecta
+                    </span>
+                    <div class="w-1 h-1 rounded-full bg-accent-500" aria-hidden="true" />
+                    <span class="text-sm font-medium tracking-widest uppercase text-primary-600">
+                        Diseñadora
+                    </span>
                 </div>
 
-                <p class="text-lg text-secondary-700 mb-12 leading-relaxed max-w-2xl animate-slide-in-left animation-delay-600">
-                    Arquitecta especializada en diseño arquitectónico, interiorismo y mobiliario personalizado. 
+                <!-- Bio -->
+                <p class="text-base text-secondary-700 leading-relaxed max-w-md mb-8">
+                    Especializada en diseño arquitectónico, interiorismo y mobiliario personalizado.
                     Combino creatividad y técnica para transformar conceptos en espacios funcionales.
                 </p>
 
+                <!-- Stats -->
+                <HeroStats stats={stats} />
 
-                <!-- Action Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 animate-slide-in-up animation-delay-100">
+                <!-- CTAs -->
+                <div class="flex flex-col sm:flex-row gap-3 mt-8">
                     <Button
-                        text="Ver mis Proyectos"
+                        text="Ver proyectos"
                         variant="filled"
                         iconName="portfolio/Proyecto"
-                        animatedBorder={true}
+                        iconAfterText={false}
                         onClick="scrollToSection('proyectos')"
                     />
                     <Button
                         text="Contactar"
-                        variant="filled"
+                        variant="outline"
                         iconName="portfolio/Contacto"
-                        animatedBorder={true}
+                        iconAfterText={false}
                         onClick="scrollToSection('contacto')"
                     />
                 </div>
             </div>
 
-            <!-- Right Visual -->
-            <div class="relative h-96 lg:h-screen lg:pt-10 flex items-center justify-center">
-                <div id="projects-bento" class="relative max-w-3xl w-full mx-auto h-full flex flex-wrap items-start justify-center gap-8">
-                    {selectedProjects.map((proj, index) => (
-                        <div
-                            class="w-48 sm:w-56 bg-cream-100 rounded-2xl shadow-md hover:shadow-lg transition-transform hover:-translate-y-1 animate-float"
-                            data-index={index}
-                        >
-                            <img
-                                src={proj.data.img.cover}
-                                alt={proj.data.title}
-                                class="w-full h-28 object-cover rounded-t-2xl"
-                            />
-                                <div class="text-center p-3">
-                                <div class="font-semibold text-primary-900 text-sm">{proj.data.title}</div>
-                                <div class="text-xs text-secondary-600">{proj.data.date}</div>
-                                <div class="hidden lg:block text-xs text-secondary-700 mt-1">{proj.data.description}</div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
+            <!-- Derecha: retrato -->
+            <HeroPortrait
+                src="/PortfolioArquitectoAstro/Images/Andris.webp"
+                alt="Andry Santana, Arquitecta"
+            />
         </div>
     </div>
-</div>
-
-<script>
-    function initStats() {
-        const container = document.getElementById("stats-container");
-        if (!container) return;
-
-        setTimeout(() => {
-            container.classList.remove("opacity-0", "translate-y-5");
-            container.classList.add("opacity-100", "translate-y-0");
-        }, 100);
-
-        const counters = container.querySelectorAll<HTMLElement>("[data-target]");
-        counters.forEach((counter) => {
-            const target = Number(counter.getAttribute("data-target") || "0");
-            const suffix = counter.dataset.suffix || "";
-            let startTime: number | null = null
-            const duration = 1500;
-
-            const step = (timestamp: number) => {
-                if (startTime === null) startTime = timestamp;
-                const progress = Math.min((timestamp - startTime) / duration, 1);
-                counter.textContent = Math.floor(progress * target) + suffix;
-                if (progress < 1) requestAnimationFrame(step);
-            };
-            requestAnimationFrame(step);
-        });
-    }
-
-    document.addEventListener("astro:page-load", initStats);
-</script>
+  </div>
+</section>
