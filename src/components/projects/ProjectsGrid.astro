@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ProjectCard from "./ProjectCard.astro";
+
+export interface Props {
+    projects: CollectionEntry<"projects">[];
+}
+const { projects } = Astro.props;
+---
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    {projects.length > 0 ? (
+        <>
+            <p class="text-xs text-cream-600 uppercase tracking-widest mb-6">
+                {projects.length} {projects.length === 1 ? "project" : "projects"}
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {projects.map((project) => (
+                    <ProjectCard project={project} />
+                ))}
+            </div>
+        </>
+    ) : (
+        <div class="flex flex-col items-center justify-center py-24 text-center">
+            <div class="w-16 h-16 rounded-2xl bg-cream-200 flex items-center justify-center mb-5">
+                <svg class="w-8 h-8 text-cream-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                </svg>
+            </div>
+            <h3 class="text-base font-medium text-cream-900 mb-2">
+                No hay proyectos disponibles
+            </h3>
+            <p class="text-sm text-cream-700 max-w-xs">
+                Los proyectos aparecerán aquí una vez que sean publicados.
+            </p>
+        </div>
+    )}
+</section>

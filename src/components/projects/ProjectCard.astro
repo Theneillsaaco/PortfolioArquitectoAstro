@@ -1,0 +1,85 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "@twodft/astro-icon/components";
+import Button from "../ui/Button.astro";
+
+interface Props {
+	project: CollectionEntry<"projects">;
+	baseUrl?: string;
+}
+
+const { project, baseUrl = "/PortfolioArquitectoAstro" } = Astro.props;
+const { title, type, date, img, description, location, tags } = project.data;
+---
+<a 
+    href={`${baseUrl}/projects/${project.id}`}
+    class="group flex flex-col bg-cream-50 rounded-2xl border border-cream-200 overflow-hidden hover:border-cream-400 hover:shadow-md transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+    aria-label={`${title}, categoria: ${type}`}
+>
+    <!-- Imag -->
+    <div class="relative overflow-hidden h-52 bg-cream-200 shrink-0">
+        <img 
+            transition:name={`project-image-${project.id}`}
+            src={img.cover}
+            alt={title}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+        />
+        <!-- State -->
+        <div class="absolute inset-0 bg-cream-900/0 group-hover:bg-accent-900/5 transition-colors duration-200" />
+    </div>
+
+    <!-- Content -->
+    <div class="flex flex-col flex-1 p-5">
+        <!-- Meta -->
+        <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full text-xs font-medium bg-primary-200 text-primary-800"
+                transition:name={`project-type-${project.id}`}
+            >
+                {type}
+            </span>
+            <time class="text-xs text-cream-600" datetime={new Date(date).toISOString()}>
+                {new Date(date).getFullYear()}
+            </time>
+        </div>
+
+        <!-- Title -->
+        <h3 class="text-base font-medium text-cream-900 mb-2 leading-snug group-hover:text-primary-600 transition-colors duration-200"
+            transition:name={`project-title-${project.id}`}
+        >
+            {title}
+        </h3>
+
+        <!-- Description -->
+        <p class="text-sm text-cream-700 line-clamp-2 leading-relaxed mb-3">
+            {description}
+        </p>
+
+        <!-- Location -->
+        <div class="flex items-center gap-1 text-xs text-cream-600 mb-3">
+            <Icon name="mdi:map-marker" class="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+            {location}
+        </div>
+
+        <!-- Tags -->
+        {tags.length > 0 && (
+            <div class="flex flex-wrap gap-1.5 mb-4">
+                {tags.map(tag => (
+                    <span class="px-2.5 py-0.5 text-xs bg-cream-200 text-cream-700 rounded-full border border-cream-300">
+                        {tag}
+                    </span>
+                ))}
+            </div>
+        )}
+
+        <!-- Footer -->
+        <div class="flex items-center justify-between mt-auto pt-4 border-t border-cream-200">
+            <Button
+                text="Ver proyecto"
+                variant="tonal"
+                iconName="portfolio/Arrow"
+                iconAfterText={true}
+            />
+        </div>
+    </div>
+</a>

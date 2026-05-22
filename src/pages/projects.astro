@@ -1,9 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import { Icon } from "@twodft/astro-icon/components";
-import Heading from '../components/ui/Heading.astro';
-import Button from '../components/ui/Button.astro';
+import ProjectsHero from '../components/projects/ProjectsHero.astro';
+import ProjectsGrid from '../components/projects/ProjectsGrid.astro';
 
 const projects: CollectionEntry<"projects">[] = await getCollection("projects");
 
@@ -15,104 +14,9 @@ const filteredProjects = projects
 <Layout title="Projects" description="A list of my projects.">
     <main class="bg-cream-50 pt-12 pb-6">
         <!-- Hero Section -->
-        <section class="bg-cream-100 shadow-sm">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                <div class="text-center">
-                    <Heading level={2} text="Nustros" textGradient="Proyectos" className="mb-4" />
-                    <p class="mt-4 text-xl text-cream-800 max-w-2xl mx-auto">
-                        Explorá nuestra colección de proyectos arquitectónicos que reflejan la identidad caribeña
-                    </p>
-                </div>
-            </div>
-        </section>
-
+        <ProjectsHero />
         <!-- Projects Grid -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredProjects.map(project => (
-                    <a
-                        href={`/PortfolioArquitectoAstro/project/${project.id}`}
-                        class="group bg-cream-50 rounded-3xl border border-cream-300 shadow-md overflow-hidden hover:shadow-xl hover:border-cream-400 transition-all duration-300 hover:-translate-y-1 block focus:outline-none focus:ring-2 focus:ring-primary-500"
-                        aria-label={`Proyecto: ${project.data.title}, Categoria: ${project.data.type}`}
-                        tabindex="0"
-                    >
-                        <div class="aspect-w-16 aspect-h-9 overflow-hidden">
-                            <img 
-                                transition:name={`project-image-${project.id}`}
-                                src={project.data.img.cover} 
-                                alt={project.data.title} 
-                                class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                                loading="lazy"
-                            />
-                        </div>
-
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="px-3 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700"  transition:name={`project-type-${project.id}`}>
-                                    {project.data.type}
-                                </span>
-                                <span class="text-sm text-cream-700">
-                                    {project.data.date}
-                                </span>
-                            </div>
-
-                            <h3 
-                                class="text-xl font-bold text-cream-900 mb-2 group-hover:text-primary-600 transition-colors"
-                                transition:name={`project-title-${project.id}`}
-                            >
-                                {project.data.title}
-                            </h3>
-
-                            <p class="text-cream-700 mb-4 line-clamp-2">
-                                {project.data.description}
-                            </p>
-
-                            <div class="flex items-center justify-between text-sm text-cream-700">
-                                <div class="flex items-center">
-                                    <Icon name="mdi:map-marker" class="w-4 h-4 mr-1" />
-                                    {project.data.location}
-                                </div>
-                            </div>
-
-                            <div class="flex flex-wrap gap-2 mt-4">
-                                {project.data.tags.map(tag => (
-                                    <span class="px-3 py-1 text-xs bg-cream-200 text-cream-800 rounded-full">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-
-                            <div class="flex py-4">
-                                <Button 
-                                    text="Ver Proyecto"
-                                    variant="tonal"
-                                    iconName="portfolio/Arrow"
-                                    iconAfterText={true}
-                                    class="mt-auto"
-                                    data-astro-prefetch
-                                />
-                            </div>  
-                        </div>
-                    </a>
-                ))}
-            </div>
-
-            {filteredProjects.length === 0 && (
-                <div class="text-center py-16">
-                    <div class="max-auto w-24 h-24 bg-cream-200 rounded-full flex items-center justify-center mb-4">
-                        <svg class="w-12 h-12 text-cream-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-medium text-cream-900 mb-2">
-                        No hay proyectos disponibles
-                    </h3>
-                    <p class="text-cream-700">
-                        Los proyectos aparecerán aquí una vez que sean publicados.
-                    </p>
-                </div>
-            )}
-        </section>
+        <ProjectsGrid projects={filteredProjects} />
     </main>
 </Layout>
 

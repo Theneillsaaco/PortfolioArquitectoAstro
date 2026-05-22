@@ -1,0 +1,42 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import { Icon } from "@twodft/astro-icon/components";
+import Heading from "../ui/Heading.astro";
+
+const projects: CollectionEntry<"projects">[] = await getCollection("projects");
+
+const categories = Array.from(
+    new Set(projects.map(p => p.data.type.toLowerCase()))
+).sort();
+---
+
+<section class="bg-cream-100 border-b border-cream-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cream-200 border border-cream-300 text-cream-700 text-xs tracking-wider uppercase mb-5">
+            <Icon name="mdi:office-building-outline" class="w-3.5 h-3.5" />
+            Portafolio
+        </div>
+
+        <Heading level={2} text="Nuestros" textGradient="Proyectos" className="mb-4" />
+
+        <p class="mt-4 text-lg text-cream-700 max-w-2xl mx-auto leading-relaxed">
+            Explorá nuestra colección de proyectos arquitectónicos que reflejan la identidad caribeña
+        </p>
+
+        <!-- Filter chips -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-8" role="group" aria-label="Filtrar por categoría">
+            {categories.map((cat, i) => (
+                <button class:list={[ "px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200", 
+                        "border focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2",
+                        i === 0 
+                        ? "bg-cream-200" 
+                        : "bg-transparent", 
+                    ]}
+                    aria-pressed={i === 0}
+                >
+                    {cat}
+                </button>
+            ))}
+        </div>
+    </div>
+</section>
