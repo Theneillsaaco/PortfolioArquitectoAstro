@@ -44,7 +44,7 @@ const { Content } = await render(project);
                 <Button 
                     text="Volver"
                     variant="outline"
-                    iconName="mdi:arrow-left"
+                    iconName="material-symbols:arrow-left-alt"
                     iconAfterText={true}
                     link="/PortfolioArquitectoAstro/projects"
                     data-astro-prefetch
@@ -96,21 +96,21 @@ const { Content } = await render(project);
                     <h3 class="text-lg font-semibold mb-4 text-cream-900">Información</h3>
                     <dl class="space-y-4">
                         <div class="flex items-start">
-                            <Icon name="mdi:map-marker-outline" class="w-5 h-5 text-cream-700 mt-0.5 mr-3" />
+                            <Icon name="material-symbols:location-on-outline" class="w-5 h-5 text-cream-700 mt-0.5 mr-3" />
                             <div>
                                 <dt class="text-sm font-medium text-cream-700">Ubicación</dt>
                                 <dd class="text-cream-900">{project.data.location}</dd>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <Icon name="mdi:tag-outline" class="w-5 h-5 text-cream-700 mt-0.5 mr-3" />
+                            <Icon name="material-symbols:tag-outline" class="w-5 h-5 text-cream-700 mt-0.5 mr-3" />
                             <div>
                                 <dt class="text-sm font-medium text-cream-700">Tipo</dt>
                                 <dd class="text-cream-900 capitalize">{project.data.type}</dd>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <Icon name="mdi:calendar-outline" class="w-5 h-5 text-cream-700 mt-0.5 mr-3" />
+                            <Icon name="material-symbols:calendar-outline" class="w-5 h-5 text-cream-700 mt-0.5 mr-3" />
                             <div>
                                 <dt class="text-sm font-medium text-cream-700">Año</dt>
                                 <dd class="text-cream-900">{project.data.date}</dd>

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
+    "@iconify-json/material-symbols": "^1.2.73",
     "@iconify-json/mdi": "1.2.3",
     "@tailwindcss/vite": "4.3.0",
     "@twodft/astro-icon": "1.2.4",

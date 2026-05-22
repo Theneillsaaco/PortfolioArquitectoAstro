@@ -10,9 +10,9 @@ const anteproyecto = [
 ];
 
 const contacto = [
-    { text: 'Bávaro, Punta Cana, RD', icon: 'mdi:map-marker' },
-    { text: '+1 829 983 2226', icon: 'mdi:phone' },
-    { text: 'andryssantana2@gmail.com', icon: 'mdi:email' } 
+    { text: 'Bávaro, Punta Cana, RD', icon: 'material-symbols:location-on' },
+    { text: '+1 829 983 2226', icon: 'material-symbols:phone-enabled' },
+    { text: 'andryssantana2@gmail.com', icon: 'material-symbols:stacked-email' } 
 ];
 
 const social = [
@@ -45,7 +45,7 @@ const social = [
                 <ul class="space-y-2">
                     {anteproyecto.map(item => (
                         <li class="flex items-center text-secondary-600 hover:text-primary-600 transition transform hover:translate-x-1 duration-300">
-                            <Icon name="generic/arrow" class="w-4 h-4 mr-2 text-accent-500" />
+                            <Icon name="material-symbols:keyboard-arrow-right" class="w-4 h-4 mr-2 text-accent-500" />
                             <a href={item.href} class="hover:underline">{item.name}</a>
                         </li>
                     ))}

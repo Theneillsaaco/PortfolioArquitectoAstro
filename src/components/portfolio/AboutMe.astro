@@ -3,15 +3,15 @@ import Heading from "../ui/Heading.astro"
 import { Icon } from "@twodft/astro-icon/components"
 
 const points = [
-    { icon: "mdi:lightbulb", title: "Diseño Inteligente", desc: "Cada espacio debe contar una historia única"},
-    { icon: "mdi:leaf", title: "Sostenibilidad", desc: "Respeto por el contexto cultural y ambiental" }
+    { icon: "material-symbols:lightbulb", title: "Diseño Inteligente", desc: "Cada espacio debe contar una historia única"},
+    { icon: "material-symbols:nest-eco-leaf-outline-rounded", title: "Sostenibilidad", desc: "Respeto por el contexto cultural y ambiental" }
 ];
 
 const skills = [
     { name: "AutoCAD", icon: "mdi:vector-square" },
-    { name: "Revit", icon: "mdi:home-modern" },
+    { name: "Revit", icon: "material-symbols:home" },
     { name: "SketchUp", icon: "mdi:cube" },
-    { name: "Photoshop", icon: "mdi:brush" },
+    { name: "Photoshop", icon: "material-symbols:brush" },
     { name: "Lumion", icon: "mdi:cube-outline" }
 ];
 ---
@@ -33,7 +33,7 @@ const skills = [
                 <!-- Decorative Elements -->
                 <div class="absolute bottom-4 left-4 flex items-center gap-3 bg-cream-50/90 backdrop-blur-sm border border-cream-200 rounded-2xl px-4 py-3">
                     <div class="w-9 h-9 rounded-xl bg-primary-100 flex items-center justify-center text-primary-700 shrink-0">
-                      <Icon name="mdi:trophy" class="w-5 h-5" aria-hidden="true" />
+                      <Icon name="material-symbols:trophy" class="w-5 h-5" aria-hidden="true" />
                     </div>
                     <div>
                       <p class="text-xs font-medium text-cream-900 leading-none mb-0.5">
@@ -49,7 +49,7 @@ const skills = [
             <!-- Right Content -->
             <div class="flex flex-col">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-100 text-primary-700 font-medium tracking-widest uppercase rounded-4xl w-fit mb-6">
-                    <Icon class="w-3.5 h-3.5" name="mdi:account" aria-hidden="true" />
+                    <Icon class="w-3.5 h-3.5" name="material-symbols:person" aria-hidden="true" />
                     <span>Sobre mi</span>
                 </div>
 
