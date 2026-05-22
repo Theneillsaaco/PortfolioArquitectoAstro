@@ -31,7 +31,7 @@ const {
     <div class="absolute bottom-0 inset-x-0 h-32 bg-linear-to-t from-primary-900/30 to-transparent z-10" />
 
     <!-- Pill: ubicación -->
-    <div class="absolute top-4 left-4 z-20 flex items-center gap-2.5 bg-cream-50/90 backdrop-blur-sm border border-cream-200 rounded-2xl px-3 py-2">
+    <div class="hidden sm:flex absolute top-4 left-4 z-20 items-center gap-2.5 bg-cream-50/90 backdrop-blur-sm border border-cream-200 rounded-2xl px-3 py-2">
         <div class="w-7 h-7 rounded-lg bg-accent-100 flex items-center justify-center text-accent-700 shrink-0">
             <Icon name="material-symbols:location-on-outline" />
         </div>
@@ -45,7 +45,7 @@ const {
         </div>
     </div>
 
-    <!-- Pill: premios — oculta en mobile chico para no saturar -->
+    <!-- Pill: premios -->
     <div class="hidden sm:flex absolute bottom-4 left-1/2 -translate-x-1/2 z-20 items-center gap-2.5 bg-cream-50/90 backdrop-blur-sm border border-cream-200 rounded-2xl px-3 py-2 flex-nowrap">
         <div class="w-7 h-7 rounded-lg bg-primary-100 flex items-center justify-center text-primary-700 shrink-0">
             <Icon name="material-symbols:check-circle-outline" />
