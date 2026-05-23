@@ -1,0 +1,81 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "@twodft/astro-icon/components";
+import Button from "../ui/Button.astro";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  index: number;
+}
+
+const { project: proj, index } = Astro.props;
+---
+
+<a
+    href={`/PortfolioArquitectoAstro/project/${proj.id}`}
+    class="portfolio-card group flex flex-col bg-cream-50 border border-cream-200 rounded-3xl overflow-hidden hover:border-cream-400 hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+    data-category={proj.data.type.toLowerCase()}
+    data-index={index}
+    aria-label={`${proj.data.title}, categoria: ${proj.data.type}`}
+>
+    <!-- Image -->
+    <div class="relative h-52 overflow-hidden bg-primary-100 shrink-0">
+        <img 
+            transition:name={`project-image-${proj.id}`}
+            src={proj.data.img.cover}
+            alt={proj.data.title}
+            loading="lazy"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+
+        <div class="absolute inset-0 bg-cream-900/0 group-hover:bg-cream-900/40 flex items-center justify-center transition-colors duration-300">
+            <span class="inline-flex items-center gap-2 bg-cream-50 text-xs font-medium px-4 py-2 rounded-full translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                <Icon name="material-symbols:visibility-rounded" class="w-4 h-4" aria-hidden="true" />
+                Ver proyecto
+            </span>
+        </div>
+    </div>
+
+    <!-- Body -->
+    <div class="flex flex-col flex-1 p-4">
+        <!-- Meta -->
+        <div class="flex items-center justify-between mb-2.5">
+            <span 
+                class="px-3 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700"
+                transition:name={`project-type-${proj.id}`}
+            >
+                {proj.data.type}
+            </span>
+            <time class="text-xs text-cream-600" datetime={new Date(proj.data.date).toISOString()}>
+                {new Date(proj.data.date).toLocaleDateString()}
+            </time>  
+        </div>
+
+        <!-- Title -->
+        <h3 
+            class="text-sm font-medium text-cream-900 leading-snug mb-1.5 group-hover:text-primary-700 transition-colors duration-200"
+            transition:name={`project-title-${proj.id}`}
+        >
+            {proj.data.title}
+        </h3>
+
+        <!-- Description -->
+        <p class="text-xs text-cream-700 leading-relaxed line-clamp-2 mb-3 flex-1">
+            {proj.data.description}
+        </p>
+
+        <!-- Footer -->
+        <div class="flex items-center justify-between pt-3 border-t border-cream-200">
+            <div class="flex items-center gap-1 text-xs text-cream-600">
+                <Icon name="material-symbols:location-on-rounded" class="w-4 h-4" aria-hidden="true" />
+                {proj.data.location}
+            </div>
+            <Button
+              text="Ver más"
+              variant="tonal"
+              iconName="material-symbols:keyboard-arrow-right"
+              iconAfterText={true}
+            />
+        </div>
+    </div>
+</a>
