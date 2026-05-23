@@ -7,151 +7,160 @@ const navLinks = [
 ];
 ---
 
-<nav id="mainNavbar" class="fixed w-full top-0 z-50 bg-cream-100/30 backdrop-blur-md transition-all duration-300 py-4 shadow-sm">
+<nav id="mainNavbar" class="fixed w-full top-0 z-50 bg-cream-100/40 backdrop-blur-md border-b border-cream-200/60 rounded-b-4xl overflow-visible">
     <div class="container mx-auto px-4 md:px-6">
         <div class="flex items-center justify-between h-16">
             <!-- Logo -->
             <a 
                 href="/PortfolioArquitectoAstro" 
                 data-astro-prefetch
-                class="flex items-center text-primary-600 text-lg font-semibold transition hover:text-accent-500 hover:-translate-y-1"
+                class="flex gap-1 items-center text-primary-700 font-semibold hover:text-primary-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-xl"
             >
-                <Icon class="w-7 h-7 mr-2" name="logo" />
-                <span class="tracking-wide">Arquitecto</span>
+                <div class="w-8 h-8 rounded-xl bg-primary-100 flex items-center justify-center text-primary-700 shrink-0" >
+                    <Icon name="logo" class="w-4 h-4" aria-hidden="true" />
+                </div>
+                <span class="text-sm tracking-wide">Arquitecto</span>
             </a>
 
-            <!-- Mobile menu button -->
-            <button 
-                id="mobileMenuBtn"
-                class="md:hidden relative w-10 h-10 flex justify-center items-center rounded-lg bg-cream-200 text-cream-800 backdrop-blur-md shadow-sm border border-cream-400 transition hover:bg-primary-100 active:scale-95"
-            >
-                <span class="line block absolute w-6 h-[2px] bg-cream-900 rounded transition-all duration-300" />
-                <span class="line block absolute w-6 h-[2px] bg-cream-900 rounded transition-all duration-300" />
-            </button>
-
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center space-x-6">
+            <div class="hidden md:flex items-center gap-1">
                 {navLinks.map(link => (
                     <a 
                         href={link.href} 
                         data-astro-prefetch
-                        class="flex items-center gap-2 text-cream-900 font-medium px-3 py-2 rounded-full transition hover:bg-primary-100 hover:text-primary-600 hover:-translate-y-1 relative overflow-hidden"
+                        class="nav-link flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-cream-800 hover:bg-primary-100 hover:text-primary-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
                     >
-                        <span class="flex items-center">
-                            <Icon class="w-5 h-5 mr-2" name={link.icon} />
-                            {link.label}
-                        </span>
+                        <Icon name={link.icon} class="w-4 h-4" aria-hidden="true" />
+                        {link.label}
                     </a>
                 ))}
             </div>
 
-            <!-- Mobile Navigation -->
-            <div class="mobile-menu hidden md:hidden backdrop-blur-lg absolute top-full left-0 right-0 bg-cream-200/90 shadow-md transition-all duration-500 ease-out opacity-0 -translate-y-5">
-                <div class="container mx-auto px-6 py-4">
-                    <div class="flex flex-col space-y-3 text-center text-base">
-                        {navLinks.map(link => (
-                            <a 
-                                href={link.href} 
-                                data-astro-prefetch
-                                class="px-4 py-3 rounded-lg transition hover:bg-primary-100 hover:text-primary-600"
-                            >
-                                {link.label}
-                            </a>
-                        ))}
-                    </div>
+            <!-- Mobile menu button -->
+            <button 
+                id="mobileMenuBtn"
+                aria-label="Abrir menú móvil"
+                aria-expanded="false"
+                aria-controls="mobileMenu"
+                class="md:hidden flex w-10 h-10 justify-center items-center rounded-xl bg-primary-100 border border-primary-200 text-primary-700 hover:bg-primary-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            >
+                <span class="sr-only">Menú</span>
+                <div id="menuIcon" aria-hidden="true" class="flex flex-col gap-1.5 w-5">
+                    <span class="line block h-0.5 bg-current rounded transition-all duration-300" />
+                    <span class="line block h-0.5 bg-current rounded transition-all duration-300" />
+                    <span class="line block h-0.5 bg-current rounded transition-all duration-300" />
                 </div>
-            </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div
+        id="mobileMenu"
+        class="md:hidden hidden border-t border-cream-200 bg-cream-50/95 backdrop-blur-md"
+        aria-hidden="true"
+    >
+        <div class="container mx-auto px-4 py-2">
+            {navLinks.map(link => (
+                <a
+                    href={link.href}
+                    data-astro-prefetch
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-cream-800 hover:bg-primary-100 hover:text-primary-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    >
+                    <Icon name={link.icon} class="w-4 h-4 text-primary-600" aria-hidden="true" />
+                    {link.label}
+                </a>
+            ))}
         </div>
     </div>
 </nav>
 
-<script is:inline>
-    (function () {
-        let controller;
+<div class="h-14" aria-hidden="true" />
 
-        function setupNavbar() {
-            controller?.abort();
-            controller = new AbortController();
-            const { signal } = controller;
+<script>
+  (function () {
+    let controller: AbortController | undefined;
 
-            const btn = document.getElementById("mobileMenuBtn");
-            const menu = document.querySelector(".mobile-menu");
-            const navbar = document.getElementById("mainNavbar");
+    function setup() {
+      controller?.abort();
+      controller = new AbortController();
+      const { signal } = controller;
 
-            if (!btn || !menu) return;
+      const btn    = document.getElementById("mobileMenuBtn") as HTMLButtonElement | null;
+      const menu   = document.getElementById("mobileMenu")   as HTMLElement | null;
+      const navbar = document.getElementById("mainNavbar")   as HTMLElement | null;
+      const lines  = document.querySelectorAll<HTMLElement>("#menuIcon .line");
 
-            function instantClose() {
-                btn.classList.remove("active");
-                menu.classList.add("hidden", "opacity-0", "-translate-y-5");
-                menu.classList.remove("opacity-100", "translate-y-0");
-            }
+      if (!btn || !menu || !navbar) return;
 
-            function openMenu() {
-                btn.classList.add("active");
-                menu.classList.remove("hidden");
-                requestAnimationFrame(() => {
-                    menu.classList.add("opacity-100", "translate-y-0");
-                    menu.classList.remove("opacity-0", "-translate-y-5");
-                });
-            }
-
-            function closeMenu() {
-                btn.classList.remove("active");
-                menu.classList.remove("opacity-100", "translate-y-0");
-                menu.classList.add("opacity-0", "-translate-y-5");
-
-                let ended = false;
-                const onEnd = () => {
-                    if (ended) return;
-                    ended = true;
-                    menu.classList.add("hidden");
-                };
-
-                menu.addEventListener("transitionend", onEnd, { once: true, signal });
-                setTimeout(onEnd, 350); 
-            }
-
-            btn.addEventListener("click", () => {
-                if (menu.classList.contains("hidden")) openMenu();
-                    else closeMenu();
-                }, { signal } 
-            );
-
-            menu.querySelectorAll("a").forEach((a) => {
-                a.addEventListener("click", closeMenu, { signal });
-            });
-
-            function onScroll() {
-                if (window.scrollY > 100) {
-                    navbar?.classList.add("shadow-md", "backdrop-blur-xl");
-                } else {
-                    navbar?.classList.remove("shadow-md", "backdrop-blur-xl");
-                }
-            }
-            window.addEventListener("scroll", onScroll, { signal });
-            onScroll();
-
-            document.addEventListener("astro:before-swap", instantClose, { signal });
+      /* ── Hamburger → X ── */
+      function setIconOpen(open: boolean) {
+        if (open) {
+          lines[0]?.style.setProperty("transform", "translateY(8px) rotate(45deg)");
+          lines[1]?.style.setProperty("opacity",   "0");
+          lines[2]?.style.setProperty("transform", "translateY(-8px) rotate(-45deg)");
+          btn!.setAttribute("aria-label",    "Cerrar menú");
+          btn!.setAttribute("aria-expanded", "true");
+          menu!.setAttribute("aria-hidden",  "false");
+        } else {
+          lines[0]?.style.removeProperty("transform");
+          lines[1]?.style.removeProperty("opacity");
+          lines[2]?.style.removeProperty("transform");
+          btn!.setAttribute("aria-label",    "Abrir menú");
+          btn!.setAttribute("aria-expanded", "false");
+          menu!.setAttribute("aria-hidden",  "true");
         }
+      }
 
-        document.addEventListener("astro:page-load", setupNavbar);
-    })();
+      function openMenu() {
+        menu!.classList.remove("hidden");
+        setIconOpen(true);
+      }
+
+      function closeMenu() {
+        menu!.classList.add("hidden");
+        setIconOpen(false);
+      }
+
+      function instantClose() {
+        menu!.classList.add("hidden");
+        setIconOpen(false);
+      }
+
+      btn.addEventListener("click", () => {
+        menu!.classList.contains("hidden") ? openMenu() : closeMenu();
+      }, { signal });
+
+      menu.querySelectorAll("a").forEach(a =>
+        a.addEventListener("click", closeMenu, { signal })
+      );
+
+      /* ── Scroll: borde más pronunciado ── */
+      function onScroll() {
+        if (window.scrollY > 60) {
+          navbar!.classList.add("shadow-sm", "bg-cream-50/95");
+          navbar!.classList.remove("bg-cream-50/80");
+        } else {
+          navbar!.classList.remove("shadow-sm", "bg-cream-50/95");
+          navbar!.classList.add("bg-cream-50/80");
+        }
+      }
+
+      window.addEventListener("scroll", onScroll, { signal });
+      onScroll();
+
+      /* ── Cerrar al navegar con View Transitions ── */
+      document.addEventListener("astro:before-swap", instantClose, { signal });
+
+      /* ── Marcar link activo ── */
+      const currentPath = window.location.pathname;
+      document.querySelectorAll<HTMLAnchorElement>(".nav-link").forEach(link => {
+        if (link.getAttribute("href") === currentPath) {
+          link.classList.add("bg-primary-100", "text-primary-700");
+        }
+      });
+    }
+
+    document.addEventListener("astro:page-load", setup);
+  })();
 </script>
-
-<style>
-    #mobileMenuBtn .line:nth-child(1) {
-        transform: translateY(-5px);
-    }
-
-    #mobileMenuBtn .line:nth-child(2) {
-        transform: translateY(5px);
-    }
-
-    #mobileMenuBtn.active .line:nth-child(1) {
-        transform: rotate(45deg);
-    }
-    
-    #mobileMenuBtn.active .line:nth-child(2) {
-        transform: rotate(-45deg);
-    }
-</style>
