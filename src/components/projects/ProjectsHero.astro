@@ -1,13 +1,13 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+// import { getCollection, type CollectionEntry } from "astro:content";
 import { Icon } from "@twodft/astro-icon/components";
 import Heading from "../ui/Heading.astro";
 
-const projects: CollectionEntry<"projects">[] = await getCollection("projects");
+// const projects: CollectionEntry<"projects">[] = await getCollection("projects");
 
-const categories = Array.from(
-    new Set(projects.map(p => p.data.type.toLowerCase()))
-).sort();
+// const categories = Array.from(
+//     new Set(projects.map(p => p.data.type.toLowerCase()))
+// ).sort();
 ---
 
 <section class="bg-cream-100 border-b border-cream-300">
@@ -22,21 +22,5 @@ const categories = Array.from(
         <p class="mt-4 text-lg text-cream-700 max-w-2xl mx-auto leading-relaxed">
             Explorá nuestra colección de proyectos arquitectónicos que reflejan la identidad caribeña
         </p>
-
-        <!-- Filter chips -->
-        <div class="flex flex-wrap items-center justify-center gap-2 mt-8" role="group" aria-label="Filtrar por categoría">
-            {categories.map((cat, i) => (
-                <button class:list={[ "px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200", 
-                        "border focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2",
-                        i === 0 
-                        ? "bg-cream-200" 
-                        : "bg-transparent", 
-                    ]}
-                    aria-pressed={i === 0}
-                >
-                    {cat}
-                </button>
-            ))}
-        </div>
     </div>
 </section>
