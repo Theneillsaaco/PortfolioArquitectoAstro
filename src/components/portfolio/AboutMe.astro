@@ -22,12 +22,19 @@ const skills = [
             <!-- Left Visual -->
             <div class="relative rounded-4xl overflow-hidden h-80 sm:h-125 lg:h-140 bg-primary-100">
                 <div class="relative w-full h-full rounded-4xl overflow-hidden shadow-xl z-20">
-                    <img
-                        src="https://images.unsplash.com/photo-1600566753151-384129cf4e3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Andrys en su estudio"
-                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                        loading="lazy"
-                    />
+                    <picture class="block w-full h-full overflow-hidden">
+                        <source 
+                            srcset="/PortfolioArquitectoAstro/Images/aboutImg.avif" 
+                            type="image/avif" 
+                        />
+                    
+                        <img
+                            src="/PortfolioArquitectoAstro/Images/aboutImg.webp" 
+                            alt="Andrys en su estudio"
+                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                            loading="lazy"
+                        />
+                    </picture>
                 </div>
 
                 <!-- Decorative Elements -->
