@@ -18,6 +18,7 @@ export interface Props {
     scrollTarget?: string;
     onClick?: string;
     animatedBorder?: boolean;
+    [key: string]: unknown; // permite data-* y otros atributos extra
 }
 
 const {
@@ -31,314 +32,115 @@ const {
     isLoading = false,
     isExternal = false,
     isActive = false,
-    class: className = "",
+    class: cls = "",
     scrollTarget,
     onClick,
     animatedBorder = false,
+    ...rest
 } = Astro.props as Props;
 
-// Clases base
-const baseClasses = `
-    relative inline-flex items-center justify-center
-    rounded-full font-medium
-    transition-all duration-200 ease-in-out
-    cursor-pointer hover:scale-105
-    disabled:opacity-50 disabled:cursor-not-allowed
-    focus-visible:outline-none focus:ring-2 focus:ring-offset-2
-    px-6 py-3
-`;
+/* ── Variantes MD3 ── */
+const base = [
+    "relative inline-flex items-center justify-center gap-2",
+    "rounded-full text-sm font-medium px-5 py-2.5",
+    "transition-colors duration-200 ease-in-out",
+    "cursor-pointer select-none",
+    "disabled:opacity-40 disabled:cursor-not-allowed",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+    cls,
+].join(" ");
 
-// Variantes específicas los estilos
-const variantClasses = {
-    filled: `
-        bg-primary-500 text-white
-        hover:bg-primary-600
-        focus:ring-primary-500
-        border-transparent
-        ${animatedBorder ? 'hover:shadow-lg hover:shadow-cream-300/30' : ''}
-    `,
-    tonal: `
-        bg-secondary-100 text-secondary-900
-        hover:bg-secondary-200 
-        focus:ring-secondary-500
-        border border-transparent
-        ${animatedBorder ? ' hover:shadow-lg hover:shadow-secondary-500/30' : ''}
-    `,
-    outline: `
-        bg-accent-50
-        border border-primary-500 text-primary-500
-        hover:bg-primary-100
-        focus:ring-primary-500
-        ${animatedBorder ? 'hover:shadow-lg hover:shadow-primary-500/30' : ''}
-    `
+const variants: Record<ButtonVariant, string> = {
+    filled:  "bg-primary-500 text-white hover:bg-primary-600 focus-visible:ring-primary-500",
+    tonal:   "bg-primary-100 text-primary-800 hover:bg-primary-200 focus-visible:ring-primary-400",
+    outline: [
+        "border border-primary-400 text-primary-700",
+        "focus-visible:ring-primary-400",
+        // Con animatedBorder: fondo sólido para tapar el conic interior
+        // Sin animatedBorder: semitransparente con blur para fondos
+        animatedBorder
+            ? "bg-cream-50 hover:bg-primary-100"
+            : "bg-cream-50/70 hover:bg-cream-50/90 backdrop-blur-sm",
+    ].join(" "),
 };
 
-// Clases de borde animado
-const borderAnimationClasses = {
-    filled: `
-        w-fit h-fit
-        bg-conic-primary
-        animate-rotate-border
-        p-px
-        rounded-full
-    `,
-    tonal: `
-        w-fit h-fit
-        bg-conic-secondary
-        animate-rotate-border
-        p-px
-        rounded-full
-    `,
-    outline: `
-        w-fit h-fit
-        bg-conic-outline
-        animate-rotate-border
-        p-px
-        rounded-full
-    `
-}
+/* ── Animated border wrapper ── */
+const wrappers: Record<ButtonVariant, string> = {
+    filled:  "p-px rounded-full bg-conic-primary  animate-rotate-border w-fit h-fit",
+    tonal:   "p-px rounded-full bg-conic-secondary animate-rotate-border w-fit h-fit",
+    outline: "p-px rounded-full bg-conic-outline   animate-rotate-border w-fit h-fit backdrop-blur-sm",
+};
 
-// Clases para iconos
-const iconClasses = "w-5 h-5";
-
-const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${className}`;
-
-// Generar aria-label si no se proporciona
-const buttonAriaLabel = ariaLabel || (iconName ? `${text} ${iconName}` : text);
-
-// Determinar si es un enlace externo
-const isExternalLink = isExternal || (link && link.startsWith('http'));
-
-// Atributos adicionales para enlaces externos
-const externalAttributes = isExternalLink ? {
-    target: '_blank',
-    rel: 'noopener noreferrer'
-} : {};
-
-// Estado de carga
-const loadingText = isLoading ? 'Cargando...' : text;
-const loadingAriaLabel = isLoading 
-    ? `${buttonAriaLabel} - Cargando` 
-    : buttonAriaLabel
-;
-
-// Determinar el onclick
-const onClickHandler = onClick || (scrollTarget ? `scrollToSection('${scrollTarget}')` : undefined);
-
-
-// Determinar si usar enlace o botón
-const useButton = !link || scrollTarget || onClick;
+const btnClass = `${base} ${variants[variant]}`;
+const isExtLink = isExternal || (link?.startsWith("http") ?? false);
+const useButton = !link || !!scrollTarget || !!onClick;
+const onClickFn = onClick ?? (scrollTarget ? `scrollToSection('${scrollTarget}')` : undefined);
+const label = ariaLabel ?? text;
+const displayText = isLoading ? "Cargando…" : text;
 ---
 
-{animatedBorder ? (
-    <div class={borderAnimationClasses[variant]}>
-        {useButton ? (
-            <button
-                class:list={buttonClasses}
-                onclick={onClickHandler}
-                aria-label={loadingAriaLabel}
-                disabled={disabled}
-                aria-disabled={disabled}
-                aria-busy={isLoading}
-                aria-pressed={isActive}
-            >
-                {iconAfterText ? (
-                    <>
-                        {loadingText}
-                        {iconName && 
-                            <Icon 
-                                name={iconName} 
-                                class={`${iconClasses} ml-2`} 
-                                aria-hidden="true" 
-                            />
-                        }
-                        {isLoading && 
-                            <Icon 
-                                name="material-symbols:loading" 
-                                class="animate-spin w-5 h-5 ml-2" 
-                                aria-hidden="true" 
-                            />
-                        }
-                    </>
-                ) : (
-                    <>
-                        {iconName && 
-                            <Icon 
-                                name={iconName} 
-                                class={`${iconClasses} mr-2`} 
-                                aria-hidden="true" 
-                            />
-                        }
-                        {isLoading && 
-                            <Icon 
-                                name="material-symbols:loading" 
-                                class="animate-spin w-5 h-5 mr-2" 
-                                aria-hidden="true" 
-                            />
-                        }
-                        {loadingText}
-                    </>
-                )}
-            </button>
-        ) : (
-            <a
-                class:list={buttonClasses}
-                href={disabled ? '#' : link}
-                aria-label={loadingAriaLabel}
-                role="button"
-                aria-disabled={disabled}
-                aria-busy={isLoading}
-                aria-pressed={isActive}
-                {...externalAttributes}
-            >
-                {iconAfterText ? (
-                    <>
-                        {loadingText}
-                        {iconName && 
-                            <Icon 
-                                name={iconName} 
-                                class={`${iconClasses} ml-2`} 
-                                aria-hidden="true" 
-                            />
-                        }
-                        {isLoading && 
-                            <Icon 
-                                name="material-symbols:loading" 
-                                class="animate-spin w-5 h-5 ml-2" 
-                                aria-hidden="true" 
-                            />
-                        }
-                    </>
-                ) : (
-                    <>
-                        {iconName && 
-                            <Icon 
-                                name={iconName} 
-                                class={`${iconClasses} mr-2`} 
-                                aria-hidden="true" 
-                            />
-                        }
-                        {isLoading && 
-                            <Icon 
-                                name="material-symbols:loading" 
-                                class="animate-spin w-5 h-5 mr-2" 
-                                aria-hidden="true" 
-                            />
-                        }
-                        {loadingText}
-                    </>
-                )}
-            </a>
-        )}
-    </div>
-) : (
-    <>
-        {useButton ? (
-            <button
-                class:list={buttonClasses}
-                onclick={onClickHandler}
-                aria-label={loadingAriaLabel}
-                disabled={disabled}
-                aria-disabled={disabled}
-                aria-busy={isLoading}
-                aria-pressed={isActive}
-            >
-                {iconAfterText ? (
-                    <>
-                        {loadingText}
-                        {iconName && 
-                            <Icon 
-                                name={iconName} 
-                                class={`${iconClasses} ml-2`} 
-                                aria-hidden="true" 
-                            />
-                        }
-                        {isLoading && 
-                            <Icon 
-                                name="material-symbols:loading" 
-                                class="animate-spin w-5 h-5 ml-2" 
-                                aria-hidden="true" 
-                            />
-                        }
-                    </>
-                ) : (
-                    <>
-                        {iconName && 
-                            <Icon 
-                                name={iconName} 
-                                class={`${iconClasses} mr-2`} 
-                                aria-hidden="true" 
-                            />
-                        }
-                        {isLoading && 
-                            <Icon 
-                                name="material-symbols:loading" 
-                                class="animate-spin w-5 h-5 mr-2" 
-                                aria-hidden="true" 
-                            />
-                        }
-                        {loadingText}
-                    </>
-                )}
-            </button>
-        ) : (
-            <a
-                class:list={buttonClasses}
-                href={disabled ? '#' : link}
-                aria-label={loadingAriaLabel}
-                role="button"
-                aria-disabled={disabled}
-                aria-busy={isLoading}
-                aria-pressed={isActive}
-                {...externalAttributes}
-            >
-                {iconAfterText ? (
-                    <>
-                        {loadingText}
-                        {iconName && 
-                            <Icon 
-                                name={iconName} 
-                                class={`${iconClasses} ml-2`} 
-                                aria-hidden="true" 
-                            />
-                        }
-                        {isLoading && 
-                            <Icon 
-                                name="material-symbols:loading" 
-                                class="animate-spin w-5 h-5 ml-2" 
-                                aria-hidden="true" 
-                            />
-                        }
-                    </>
-                ) : (
-                    <>
-                        {iconName && 
-                            <Icon 
-                                name={iconName} 
-                                class={`${iconClasses} mr-2`} 
-                                aria-hidden="true" 
-                            />
-                        }
-                        {isLoading && 
-                            <Icon 
-                                name="material-symbols:loading" 
-                                class="animate-spin w-5 h-5 mr-2" 
-                                aria-hidden="true" 
-                            />
-                        }
-                        {loadingText}
-                    </>
-                )}
-            </a>
-        )}
-    </>
-)}
+<!--
+  Un único slot de contenido — sin duplicar el bloque ícono+texto 4 veces.
+  El Astro component wrapper decide si envolver con el anillo animado.
+-->
+
+{(() => {
+    const inner = (
+        <>
+            {!iconAfterText && iconName && (
+                <Icon name={iconName} class="w-4 h-4 shrink-0" aria-hidden="true" />
+            )}
+            
+            {isLoading && (
+                <Icon name="material-symbols:progress-activity" class="w-4 h-4 shrink-0 animate-spin" aria-hidden="true" />
+            )}
+            
+            <span>
+                {displayText}
+            </span>
+            
+            {iconAfterText && iconName && (
+                <Icon name={iconName} class="w-4 h-4 shrink-0" aria-hidden="true" />
+            )}
+        </>
+    );
+
+    const sharedProps = {
+        "aria-label": label,
+        "aria-disabled": disabled,
+        "aria-busy": isLoading,
+        "aria-pressed": isActive,
+        class: btnClass,
+        ...rest,
+    };
+
+    const element = useButton ? (
+        <button
+            {...sharedProps}
+            disabled={disabled}
+            onclick={onClickFn}
+        >
+            {inner}
+        </button>
+    ) : (
+        <a
+            {...sharedProps}
+            href={disabled ? "#" : link}
+            role="button"
+            target={isExtLink ? "_blank" : undefined}
+            rel={isExtLink ? "noopener noreferrer" : undefined}
+        >
+            {inner}
+        </a>
+    );
+
+    return animatedBorder ? (
+        <div class={wrappers[variant]}>{element}</div>
+    ) : element;
+})()}
 
 <script is:inline>
     window.scrollToSection = (id) => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.scrollIntoView({ behavior: "smooth" });
-        }
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     };
 </script>
