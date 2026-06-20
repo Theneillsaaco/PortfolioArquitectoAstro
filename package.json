@@ -14,7 +14,7 @@
     "@iconify-json/mdi": "1.2.3",
     "@tailwindcss/vite": "4.3.0",
     "@twodft/astro-icon": "1.2.4",
-    "astro": "6.3.7",
+    "astro": "6.4.6",
     "tailwindcss": "4.3.0",
     "typescript": "5.9.2"
   },
