@@ -9,16 +9,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "0.9.9",
-    "@iconify-json/material-symbols": "1.2.73",
+    "@astrojs/check": "0.9.10",
+    "@iconify-json/material-symbols": "1.2.91",
     "@iconify-json/mdi": "1.2.3",
-    "@tailwindcss/vite": "4.3.0",
+    "@tailwindcss/vite": "4.3.3",
     "@twodft/astro-icon": "1.2.4",
-    "astro": "6.3.7",
-    "tailwindcss": "4.3.0",
+    "astro": "7.3.2",
+    "tailwindcss": "4.3.3",
     "typescript": "5.9.2"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "0.5.16"
+    "@tailwindcss/typography": "0.5.20"
   }
 }
